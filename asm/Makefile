@@ -12,7 +12,9 @@ NAME		=	asm
 
 ############################## SOURCES #########################################
 
-SRCC			=	main.c\
+SRCC			=	get_word_id.c\
+					lexer.c\
+					main.c\
 					op.c\
 
 ODIR			=	obj
@@ -33,7 +35,9 @@ $(NAME): $(SUB1D)/libft.a $(ODIR) $(OBJ)
 $(SUB1D)/libft.a:
 	make -C $(SUB1D)
 
-main.o: libft.h op.h errors.h
+get_word_id.o: lexer.h libft.h op.h errors.h
+lexer.o: lexer.h libft.h op.h
+main.o: op.h errors.h lexer.h libft.h
 op.o: op.h
 %.o: %.c
 	@mkdir -p $(ODIR)

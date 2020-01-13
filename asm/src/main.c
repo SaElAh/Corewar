@@ -6,13 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:34:14 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/13 18:38:58 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/14 00:10:57 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "op.h"
 #include "errors.h"
+#include "lexer.h"
 #include <fcntl.h>
 #include <stdio.h>
 
@@ -57,9 +57,10 @@ static t_list	*read_file(const char *file_name)
 
 int			main(int argc, char **argv)
 {
-	t_list	*file;
-	int		len;
-//	t_list	*tokens;
+	int				len;
+	t_list			*file;
+	t_list			**tokens;
+//	t_parsed_data	pdat;
 
 	if (argc != 2)
 	{
@@ -71,7 +72,9 @@ int			main(int argc, char **argv)
 		ft_exit("error: wrong file type", E_WRONG_FILE);
 	file = read_file(argv[1]);
 	print_file(file); //TEMP
-//	tokens = tokenize(file);
+	tokens = lexer(file);
+//	ft_bzero((void *)&pdat, sizeof(t_parsed_data));
+//	pdat = parser(&pdat, file, tokens);
 //	compile(tokens);
 	ft_heap_collector(NULL, FT_COLLEC_FREE);
 	return (0);
