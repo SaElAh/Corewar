@@ -6,13 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:34:43 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/13 16:42:24 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/13 18:47:28 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-t_op    op_tab[17] =
+t_op    op_tab[OP_COUNT + 1] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},

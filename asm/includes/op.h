@@ -6,23 +6,18 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:39:35 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/13 16:44:20 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/13 18:47:16 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-** Toutes les tailles sont en octets.
-** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
-*/
 
 #define IND_SIZE				2
 #define REG_SIZE				4
 #define DIR_SIZE				REG_SIZE
 
 
-# define REG_CODE				1
-# define DIR_CODE				2
-# define IND_CODE				3
+#define REG_CODE				1
+#define DIR_CODE				2
+#define IND_CODE				3
 
 
 #define MAX_ARGS_NUMBER			4
@@ -47,6 +42,8 @@
 #define CYCLE_DELTA				50
 #define NBR_LIVE				21
 #define MAX_CHECKS				10
+
+#define OP_COUNT				16
 
 /*
 **
