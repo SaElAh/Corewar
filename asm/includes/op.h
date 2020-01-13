@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:39:35 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/09 14:39:44 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/13 16:44:20 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,15 @@ typedef struct		header_s
   unsigned int		prog_size;
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
+
+typedef struct		s_op
+{
+	const char		*name;
+	unsigned int	argc;
+	unsigned char	args[3];
+	unsigned int	opcode;
+	unsigned int	cycle_delay; 
+	const char		*description;
+	unsigned int	arg_type_code;
+	unsigned int	mod_tdir_size;
+}					t_op;
