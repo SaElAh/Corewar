@@ -12,7 +12,8 @@ NAME		=	asm
 
 ############################## SOURCES #########################################
 
-SRCC			=	get_word_id.c\
+SRCC			=	error_unknown_token.c\
+					get_word_id.c\
 					lexer.c\
 					main.c\
 					op.c\
@@ -35,6 +36,7 @@ $(NAME): $(SUB1D)/libft.a $(ODIR) $(OBJ)
 $(SUB1D)/libft.a:
 	make -C $(SUB1D)
 
+error_unknown_token.o: libft.h
 get_word_id.o: lexer.h libft.h op.h errors.h
 lexer.o: lexer.h libft.h op.h
 main.o: op.h errors.h lexer.h libft.h

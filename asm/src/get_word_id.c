@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 22:54:52 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/14 00:07:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/14 15:11:35 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int				check_uint(const char *str, int len)
 		return (1);
 	while (len && ft_isdigit(*str++))
 		--len;
-	return (!len);
+	return (len);
 }
 
 static int				check_int(const char *str, int len)
@@ -80,8 +80,6 @@ enum e_token_word_id	get_word_id(t_token *cur, int line_id)
 		return (I_LABEL);
 	else if (!check_instruction(cur))
 		return (I_INSTRUCTION);
-	ft_dprintf(2, "lexer: unknown token '%.*s' at line %d\n",
-		cur->len, cur->str, line_id);
-	ft_exit(NULL, E_UNKNOWN_TOKEN);
+	error_unknown_token(cur->len, cur->str, line_id);
 	return (I_NONE);
 }
