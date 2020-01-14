@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:05:53 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/14 16:37:45 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/14 16:42:12 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_list	*tokenize(const char *line, int line_id)
 	reset_token(&cur);
 	while (*line && *line != '#' && *line != ';')
 	{
-		if (cur.type == T_WORD && ft_strchr(" \t,\"", *line))
+		if (cur.type == T_WORD && ft_strchr(" \t,\"%", *line))
 			delimit_token(&cur, &tokens, line, line_id);
 		else if (cur.type == T_STRING && *line == '"')
 			delimit_token(&cur, &tokens, line++, line_id);
