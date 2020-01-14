@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:34:14 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/14 00:10:57 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/14 15:40:08 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,37 @@ static void		print_file(t_list *file) //TEMP
 	{
 		ft_printf("%d: '%s'\n", ++lc, (char *)file->content);
 		file = file->next;
+	}
+}
+
+const char		*g_token_type_str[TOKEN_TYPE_COUNT] = {
+	"T_WORD", "T_STRING", "T_SEPARATOR", "T_NONE"
+};
+
+const char		*g_token_word_id[TOKEN_ID_COUNT] = {
+	"I_COMMAND", "I_LABEL", "I_INSTRUCTION", "I_REGISTER", "I_DIRECT",
+	"I_INDIRECT", "I_DIRECT_LABEL", "I_INDIRECT_LABEL", "I_NONE"
+};
+
+static void		print_tokens(t_list **tokens, int len) //TEMP
+{
+	int		i;
+	t_token	*cur;
+	t_list	*line;
+
+	i = -1;
+	while (++i < len)
+	{
+		if ((line = tokens[i]))
+			ft_printf("line %d:\n", i + 1);
+		while (line)
+		{
+			cur = (t_token *)line->content;
+			ft_printf("[ type = %s, id = %s, op_code = %d, str = %.*s ]\n",
+				g_token_type_str[cur->type], g_token_word_id[cur->id],
+				cur->op_code, cur->len, cur->str);
+			line = line->next;
+		}
 	}
 }
 
@@ -73,6 +104,7 @@ int			main(int argc, char **argv)
 	file = read_file(argv[1]);
 	print_file(file); //TEMP
 	tokens = lexer(file);
+	print_tokens(tokens, ft_lst_size(file)); //TEMP
 //	ft_bzero((void *)&pdat, sizeof(t_parsed_data));
 //	pdat = parser(&pdat, file, tokens);
 //	compile(tokens);

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 20:35:16 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/14 15:12:25 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/14 15:30:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ enum						e_token_word_id {I_COMMAND, I_LABEL,
 	I_INSTRUCTION, I_REGISTER, I_DIRECT, I_INDIRECT, I_DIRECT_LABEL,
 	I_INDIRECT_LABEL, I_NONE};
 
-# define TOKEN_ID_COUNT		10
+# define TOKEN_ID_COUNT		9
 
 typedef struct				s_token
 {
