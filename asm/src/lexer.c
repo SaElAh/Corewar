@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:05:53 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/14 16:42:12 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:08:49 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ static t_list	*tokenize(const char *line, int line_id)
 	return (tokens);
 }
 
-t_list			**lexer(t_list *file)
+t_list			**lexer(t_list *file, size_t file_len)
 {
 	t_list	**tokens;
 	int		i;
 
-	tokens = (t_list **)ft_memalloc(ft_lst_size(file) * sizeof(t_list *));
+	tokens = (t_list **)ft_memalloc(file_len * sizeof(t_list *));
 	i = 0;
 	while (file)
 	{

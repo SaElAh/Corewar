@@ -39,7 +39,7 @@ $(SUB1D)/libft.a:
 error_unknown_token.o: libft.h errors.h
 get_word_id.o: lexer.h libft.h op.h errors.h
 lexer.o: lexer.h libft.h op.h
-main.o: op.h errors.h lexer.h libft.h
+main.o: s_asmdata.h libft.h op.h errors.h lexer.h
 op.o: op.h
 %.o: %.c
 	@mkdir -p $(ODIR)

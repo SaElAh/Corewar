@@ -6,11 +6,11 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:34:14 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/14 15:40:08 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:12:04 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "s_asmdata.h"
 #include "errors.h"
 #include "lexer.h"
 #include <fcntl.h>
@@ -89,9 +89,7 @@ static t_list	*read_file(const char *file_name)
 int			main(int argc, char **argv)
 {
 	int				len;
-	t_list			*file;
-	t_list			**tokens;
-//	t_parsed_data	pdat;
+	t_asmdata		adat;
 
 	if (argc != 2)
 	{
@@ -101,11 +99,13 @@ int			main(int argc, char **argv)
 	else if ((len = ft_strlen(argv[1])) < 2
 		|| ft_strcmp(argv[1] + len - 2, ".s"))
 		ft_exit("error: wrong file type", E_WRONG_FILE);
-	file = read_file(argv[1]);
-	print_file(file); //TEMP
-	tokens = lexer(file);
-	print_tokens(tokens, ft_lst_size(file)); //TEMP
-//	ft_bzero((void *)&pdat, sizeof(t_parsed_data));
+	ft_bzero((void *)&adat, sizeof(t_asmdata));
+	adat.file_name = argv[1];
+	adat.file = read_file(argv[1]);
+	adat.file_len = ft_lst_size(adat.file);
+	print_file(adat.file); //TEMP
+	adat.tokens = lexer(adat.file, adat.file_len);
+	print_tokens(adat.tokens, adat.file_len); //TEMP
 //	pdat = parser(&pdat, file, tokens);
 //	compile(tokens);
 	ft_heap_collector(NULL, FT_COLLEC_FREE);

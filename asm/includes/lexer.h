@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 20:35:16 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/14 15:30:46 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:09:32 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct				s_token
 	int						len;
 }							t_token;
 
-t_list						**lexer(t_list *file);
+t_list						**lexer(t_list *file, size_t file_len);
 enum e_token_word_id		get_word_id(t_token *cur, int line_id);
 void						error_unknown_token(int len, const char *str,
 								int line_id);
