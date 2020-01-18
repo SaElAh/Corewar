@@ -22,6 +22,7 @@ SRCC			=	add_label.c\
 					main.c\
 					op.c\
 					parse_instruction.c\
+					write_exec_file.c\
 
 ODIR			=	obj
 OBJ				=	$(patsubst %.c,%.o,$(SRCC))
@@ -51,6 +52,7 @@ lexer.o: lexer.h libft.h op.h errors.h
 main.o: errors.h compiler.h asm_parser.h s_asmdata.h lexer.h libft.h op.h
 op.o: op.h
 parse_instruction.o: s_asmdata.h lexer.h libft.h op.h errors.h
+write_exec_file.o: s_asmdata.h lexer.h libft.h op.h errors.h
 %.o: %.c
 	@mkdir -p $(ODIR)
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@

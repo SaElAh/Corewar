@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 13:09:40 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 20:57:22 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/18 21:04:16 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,5 @@ void		compiler(t_asmdata *adat)
 	(void)adat;
 	compile_instructions(adat);
 	compile_labels(adat);
-//	write_exec_file(adat);
+	write_exec_file(adat);
 }
