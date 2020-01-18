@@ -6,15 +6,29 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:23:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/15 16:02:23 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/18 00:10:31 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef S_ASMDATA_H
 # define S_ASMDATA_H
 
-# include "libft.h"
+# include "lexer.h"
 # include "op.h"
+
+/*
+** s_parsed_op:
+** op_code:		operation identifier
+** argc:		number of args
+** args:		arg tokens
+*/
+
+typedef struct		s_parsed_op
+{
+	unsigned char	op_code;
+	unsigned int	argc;
+	t_token			*args[3];
+}					t_parsed_op;
 
 /*
 **
@@ -24,7 +38,7 @@
 ** file:		stores every line of the input file in a chained list
 ** tokens:		array of chained list of file_len size storing the tokens
 ** file_len:	number of lines in the input file
-** ops:			chained list of every operation in a compilable format
+** ops:			array of every operation in a compilable format
 ** ops_len:		number of operations
 ** labels:		chained list of every labels and their op reference
 ** prog_name:	value of the ".name" command
@@ -40,12 +54,12 @@ typedef struct		s_asmdata
 	t_list			*file;
 	t_list			**tokens;
 	size_t			file_len;
-	t_list			*ops;
+	t_parsed_op		*ops;
 	size_t			ops_len;
 	t_list			*labels;
-	char			prog_name[PROG_NAME_LENGTH + 1];
+	char			prog_name[PROG_NAME_LENGTH + NULL_SEP];
 	unsigned int	prog_size;
-	char			comment[COMMENT_LENGTH + 1];
+	char			comment[COMMENT_LENGTH + NULL_SEP];
 	unsigned char	prog[CHAMP_MAX_SIZE];
 }					t_asmdata;
 

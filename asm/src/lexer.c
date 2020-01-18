@@ -6,12 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:05:53 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/15 16:08:49 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/15 18:15:44 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "op.h"
+#include "errors.h"
 
 static void		reset_token(t_token *cur)
 {

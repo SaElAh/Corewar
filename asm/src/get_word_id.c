@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 22:54:52 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/14 15:11:35 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/17 21:52:03 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int				check_instruction(t_token *cur)
 		++i;
 	if (i < OP_COUNT)
 	{
-		cur->op_code = i;
+		cur->op_code = i + 1;
 		return (0);
 	}
 	return (1);
@@ -72,8 +72,9 @@ enum e_token_word_id	get_word_id(t_token *cur, int line_id)
 		return (I_DIRECT);
 	else if (*cur->str == 'r' && !check_uint(cur->str + 1, cur->len - 1))
 		return (I_REGISTER);
-	else if ((cur->len == 5 && !ft_strncmp(cur->str, ".name", cur->len))
-		|| (cur->len == 8 && !ft_strncmp(cur->str, ".comment", cur->len)))
+	else if ((cur->len == 5 && !ft_strncmp(cur->str, NAME_CMD_STRING, cur->len))
+		|| (cur->len == 8 && !ft_strncmp(cur->str,
+		COMMENT_CMD_STRING, cur->len)))
 		return (I_COMMAND);
 	else if (cur->str[cur->len - 1] == ':'
 		&& !check_label_chars(cur->str, cur->len - 1))

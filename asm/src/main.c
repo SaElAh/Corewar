@@ -6,13 +6,12 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:34:14 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/15 16:12:04 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/18 01:12:22 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "s_asmdata.h"
 #include "errors.h"
-#include "lexer.h"
+#include "asm_parser.h"
 #include <fcntl.h>
 #include <stdio.h>
 
@@ -56,6 +55,42 @@ static void		print_tokens(t_list **tokens, int len) //TEMP
 				cur->op_code, cur->len, cur->str);
 			line = line->next;
 		}
+	}
+}
+
+void	print_ops(t_parsed_op *ops, size_t ops_len) //TEMP
+{
+	size_t			i;
+	unsigned int	j;
+	t_token			*cur;
+
+	i = 0;
+	while (i < ops_len)
+	{
+		ft_printf("ops[%zu]: %s, argc = %u\nargs:\n", i,
+			g_op_tab[ops[i].op_code - 1].name, ops[i].argc);
+		j = 0;
+		while (j < ops[i].argc)
+		{
+			cur = ops[i].args[j++];
+			ft_printf("[ type = %s, id = %s, op_code = %d, str = %.*s ]\n",
+				g_token_type_str[cur->type], g_token_word_id[cur->id],
+				cur->op_code, cur->len, cur->str);
+		}
+		++i;
+	}
+}
+
+void	print_labels(t_list *labels) //TEMP
+{
+	t_label	*cur;
+
+	while (labels)
+	{
+		cur = labels->content;
+		ft_printf("label '%.*s': op_ref = %d, line = %d\n", cur->name_len,
+			cur->name, cur->op_ref, cur->line);
+		labels = labels->next;
 	}
 }
 
@@ -103,11 +138,13 @@ int			main(int argc, char **argv)
 	adat.file_name = argv[1];
 	adat.file = read_file(argv[1]);
 	adat.file_len = ft_lst_size(adat.file);
-	print_file(adat.file); //TEMP
+//	print_file(adat.file); //TEMP
 	adat.tokens = lexer(adat.file, adat.file_len);
-	print_tokens(adat.tokens, adat.file_len); //TEMP
-//	pdat = parser(&pdat, file, tokens);
-//	compile(tokens);
+//	print_tokens(adat.tokens, adat.file_len); //TEMP
+	asm_parser(&adat);
+	print_ops(adat.ops, adat.ops_len); //TEMP
+	print_labels(adat.labels); //TEMP
+//	compiler(tokens);
 	ft_heap_collector(NULL, FT_COLLEC_FREE);
 	return (0);
 }

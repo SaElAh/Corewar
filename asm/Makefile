@@ -12,11 +12,14 @@ NAME		=	asm
 
 ############################## SOURCES #########################################
 
-SRCC			=	error_unknown_token.c\
+SRCC			=	add_label.c\
+					asm_parser.c\
+					errors.c\
 					get_word_id.c\
 					lexer.c\
 					main.c\
 					op.c\
+					parse_instruction.c\
 
 ODIR			=	obj
 OBJ				=	$(patsubst %.c,%.o,$(SRCC))
@@ -36,11 +39,14 @@ $(NAME): $(SUB1D)/libft.a $(ODIR) $(OBJ)
 $(SUB1D)/libft.a:
 	make -C $(SUB1D)
 
-error_unknown_token.o: libft.h errors.h
+add_label.o: asm_parser.h s_asmdata.h lexer.h libft.h op.h errors.h
+asm_parser.o: asm_parser.h s_asmdata.h lexer.h libft.h op.h errors.h
+errors.o: libft.h errors.h
 get_word_id.o: lexer.h libft.h op.h errors.h
-lexer.o: lexer.h libft.h op.h
-main.o: s_asmdata.h libft.h op.h errors.h lexer.h
+lexer.o: lexer.h libft.h op.h errors.h
+main.o: errors.h asm_parser.h s_asmdata.h lexer.h libft.h op.h
 op.o: op.h
+parse_instruction.o: s_asmdata.h lexer.h libft.h op.h errors.h
 %.o: %.c
 	@mkdir -p $(ODIR)
 	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@

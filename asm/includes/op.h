@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:39:35 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/14 00:04:49 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/15 16:43:45 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,23 +56,16 @@ typedef char	t_arg_type;
 **
 */
 
+# define COREWAR_EXEC_MAGIC		0xea83f3
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
-# define COREWAR_EXEC_MAGIC		0xea83f3
-
-typedef struct		header_s
-{
-  unsigned int		magic;
-  char				prog_name[PROG_NAME_LENGTH + 1];
-  unsigned int		prog_size;
-  char				comment[COMMENT_LENGTH + 1];
-}					header_t;
+# define NULL_SEP				4
 
 typedef struct		s_op
 {
 	const char		*name;
 	unsigned int	argc;
-	unsigned char	args[3];
+	unsigned char	arg_types[3];
 	unsigned int	opcode;
 	unsigned int	cycle_delay; 
 	const char		*description;
