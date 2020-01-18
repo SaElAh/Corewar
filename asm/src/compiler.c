@@ -6,14 +6,14 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 13:09:40 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 19:36:39 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/18 20:57:22 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm_parser.h"
+#include "compiler.h"
 #include "errors.h"
 
-void		write_bytes(t_asmdata *adat, t_parsed_op *op,
+static void	write_arg_bytes(t_asmdata *adat, t_parsed_op *op,
 				int value, unsigned int size)
 {
 	unsigned char	*bin;
@@ -66,7 +66,7 @@ static void	compile_inst_args(t_asmdata *adat, t_parsed_op *op)
 	while (op->address + op->len < CHAMP_MAX_SIZE && i < op->argc)
 	{
 		value = parse_arg(arg_types, op, i, &size);
-		write_bytes(adat, op, value, size);
+		write_arg_bytes(adat, op, value, size);
 		++i;
 	}
 }
@@ -95,6 +95,6 @@ void		compiler(t_asmdata *adat)
 {
 	(void)adat;
 	compile_instructions(adat);
-//	compile_labels(adat);
+	compile_labels(adat);
 //	write_exec_file(adat);
 }

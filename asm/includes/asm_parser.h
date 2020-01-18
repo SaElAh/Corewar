@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 00:21:40 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 00:27:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/18 20:25:22 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_label
 }					t_label;
 
 void				asm_parser(t_asmdata *adat);
+int					label_cmp(void *l1, void *l2);
 void				add_label(t_asmdata *adat, t_token *cur,
 						int line, int op_ref);
 void				parse_instruction(t_asmdata *adat, t_list *tokens,

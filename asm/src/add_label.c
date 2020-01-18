@@ -6,14 +6,14 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:08:53 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 00:22:30 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/18 20:28:33 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm_parser.h"
 #include "errors.h"
 
-static int	label_cmp(void *l1, void *l2)
+int		label_cmp(void *l1, void *l2)
 {
 	t_label	*label1;
 	t_label	*label2;
