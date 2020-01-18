@@ -6,15 +6,16 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:34:14 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 01:12:22 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/18 19:19:52 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "errors.h"
-#include "asm_parser.h"
+#include "compiler.h"
 #include <fcntl.h>
 #include <stdio.h>
 
+/*
 static void		print_file(t_list *file) //TEMP
 {
 	int		lc;
@@ -26,6 +27,7 @@ static void		print_file(t_list *file) //TEMP
 		file = file->next;
 	}
 }
+*/
 
 const char		*g_token_type_str[TOKEN_TYPE_COUNT] = {
 	"T_WORD", "T_STRING", "T_SEPARATOR", "T_NONE"
@@ -36,6 +38,7 @@ const char		*g_token_word_id[TOKEN_ID_COUNT] = {
 	"I_INDIRECT", "I_DIRECT_LABEL", "I_INDIRECT_LABEL", "I_NONE"
 };
 
+/*
 static void		print_tokens(t_list **tokens, int len) //TEMP
 {
 	int		i;
@@ -57,6 +60,7 @@ static void		print_tokens(t_list **tokens, int len) //TEMP
 		}
 	}
 }
+*/
 
 void	print_ops(t_parsed_op *ops, size_t ops_len) //TEMP
 {
@@ -91,6 +95,28 @@ void	print_labels(t_list *labels) //TEMP
 		ft_printf("label '%.*s': op_ref = %d, line = %d\n", cur->name_len,
 			cur->name, cur->op_ref, cur->line);
 		labels = labels->next;
+	}
+}
+
+void	print_hex_prog(t_asmdata *adat) //TEMP
+{
+	unsigned int	address;
+	unsigned int	i;
+
+	address = 0;
+	while (address < adat->prog_size)
+	{
+		ft_printf("%.8x:", address);
+		i = 0;
+		while (address + i < adat->prog_size && i < 16)
+		{
+			if (!(i % 2))
+				ft_printf(" ");
+			ft_printf("%.2x", adat->prog[address + i]);
+			++i;
+		}
+		ft_printf("\n");
+		address += 16;
 	}
 }
 
@@ -144,7 +170,8 @@ int			main(int argc, char **argv)
 	asm_parser(&adat);
 	print_ops(adat.ops, adat.ops_len); //TEMP
 	print_labels(adat.labels); //TEMP
-//	compiler(tokens);
+	compiler(&adat);
+	print_hex_prog(&adat); //TEMP
 	ft_heap_collector(NULL, FT_COLLEC_FREE);
 	return (0);
 }

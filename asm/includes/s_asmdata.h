@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:23:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 00:10:31 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/18 18:08:42 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,19 @@
 ** op_code:		operation identifier
 ** argc:		number of args
 ** args:		arg tokens
+** label_add:	address of labels if any (relative to the start of instruction)
+** address:		start of the instruction in the prog memory
+** len:			length of the binary instruction
 */
 
 typedef struct		s_parsed_op
 {
 	unsigned char	op_code;
 	unsigned int	argc;
-	t_token			*args[3];
+	t_token			*args[MAX_ARGS_NUMBER];
+	unsigned char	label_add[MAX_ARGS_NUMBER];
+	unsigned int	address;
+	unsigned int	len;
 }					t_parsed_op;
 
 /*

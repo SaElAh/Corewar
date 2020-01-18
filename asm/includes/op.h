@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:39:35 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/15 16:43:45 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/18 19:35:16 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # define IND_SIZE				2
 # define REG_SIZE				4
 # define DIR_SIZE				REG_SIZE
+
+
+# define IND_BYTE_SIZE			2
+# define REG_BYTE_SIZE			1
+# define DIR_BYTE_SIZE			REG_SIZE
 
 
 # define REG_CODE				1
@@ -65,10 +70,7 @@ typedef struct		s_op
 {
 	const char		*name;
 	unsigned int	argc;
-	unsigned char	arg_types[3];
-	unsigned int	opcode;
-	unsigned int	cycle_delay; 
-	const char		*description;
+	unsigned char	arg_types[MAX_ARGS_NUMBER];
 	unsigned int	arg_type_code;
 	unsigned int	mod_tdir_size;
 }					t_op;

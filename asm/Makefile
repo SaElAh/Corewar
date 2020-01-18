@@ -14,6 +14,7 @@ NAME		=	asm
 
 SRCC			=	add_label.c\
 					asm_parser.c\
+					compiler.c\
 					errors.c\
 					get_word_id.c\
 					lexer.c\
@@ -41,10 +42,11 @@ $(SUB1D)/libft.a:
 
 add_label.o: asm_parser.h s_asmdata.h lexer.h libft.h op.h errors.h
 asm_parser.o: asm_parser.h s_asmdata.h lexer.h libft.h op.h errors.h
+compiler.o: asm_parser.h s_asmdata.h lexer.h libft.h op.h
 errors.o: libft.h errors.h
 get_word_id.o: lexer.h libft.h op.h errors.h
 lexer.o: lexer.h libft.h op.h errors.h
-main.o: errors.h asm_parser.h s_asmdata.h lexer.h libft.h op.h
+main.o: errors.h compiler.h asm_parser.h s_asmdata.h lexer.h libft.h op.h
 op.o: op.h
 parse_instruction.o: s_asmdata.h lexer.h libft.h op.h errors.h
 %.o: %.c
