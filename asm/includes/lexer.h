@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 20:35:16 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/15 18:19:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 20:34:44 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "libft.h"
 
-enum						e_token_type {T_WORD, T_STRING,
-	T_SEPARATOR, T_NONE};
+enum						e_token_type {T_WORD, T_STRING, T_START_STRING,
+	T_PART_STRING, T_END_STRING, T_SEPARATOR, T_NONE};
 
 # define TOKEN_TYPE_COUNT	4
 
@@ -37,5 +37,11 @@ typedef struct				s_token
 
 t_list						**lexer(t_list *file, size_t file_len);
 enum e_token_word_id		get_word_id(t_token *cur, int line_id);
+t_list						*tokenize(const char *str,
+								int i, int *multiline_string);
+t_list						*handle_multiline_string(const char *str,
+								int i, int *multiline_string);
+void						fuse_multiline_strings(t_list **tokens,
+								size_t file_len);
 
 #endif

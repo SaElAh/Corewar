@@ -18,6 +18,7 @@ SRCC			=	add_label.c\
 					compiler.c\
 					errors.c\
 					get_word_id.c\
+					handle_multiline_string.c\
 					lexer.c\
 					main.c\
 					op.c\
@@ -48,6 +49,7 @@ compile_labels.o: asm_parser.h s_asmdata.h lexer.h libft.h op.h errors.h
 compiler.o: compiler.h asm_parser.h s_asmdata.h lexer.h libft.h op.h errors.h
 errors.o: libft.h errors.h
 get_word_id.o: lexer.h libft.h op.h errors.h
+handle_multiline_string.o: lexer.h libft.h errors.h
 lexer.o: lexer.h libft.h op.h errors.h
 main.o: errors.h compiler.h asm_parser.h s_asmdata.h lexer.h libft.h op.h
 op.o: op.h

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:05:53 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 16:11:49 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 21:33:11 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ static void		delimit_token(t_token *cur, t_list **tokens,
 		&& cur->str[cur->len] == '"')
 		cur->len += 1;
 	else if (cur->type == T_STRING)
-		error_unknown_token(cur->len, cur->str, line_id);
+		cur->type = T_START_STRING;
 	cur->id = cur->type == T_WORD ? get_word_id(cur, line_id) : I_NONE;
 	ft_lst_push_back(tokens, cur, sizeof(t_token));
 	reset_token(cur);
 }
 
-static t_list	*tokenize(const char *line, int line_id)
+t_list			*tokenize(const char *line, int line_id, int *multiline_string)
 {
 	t_token	cur;
 	t_list	*tokens;
@@ -75,21 +75,37 @@ static t_list	*tokenize(const char *line, int line_id)
 		}
 	}
 	delimit_token(&cur, &tokens, line, line_id);
+	if (tokens
+		&& ((t_token *)ft_lst_last(tokens)->content)->type == T_START_STRING)
+		*multiline_string = 1;
 	return (tokens);
 }
 
 t_list			**lexer(t_list *file, size_t file_len)
 {
+	int		multiline_string;
+	int		fuse_multi;
 	t_list	**tokens;
 	int		i;
 
 	tokens = (t_list **)ft_memalloc(file_len * sizeof(t_list *));
 	i = 0;
+	multiline_string = 0;
+	fuse_multi = 0;
 	while (file)
 	{
-		tokens[i] = tokenize(file->content, i);
+		if (multiline_string)
+		{
+			tokens[i] = handle_multiline_string(file->content, i,
+				&multiline_string);
+			fuse_multi = 1;
+		}
+		else
+			tokens[i] = tokenize(file->content, i, &multiline_string);
 		file = file->next;
 		++i;
 	}
+	if (fuse_multi)
+		fuse_multiline_strings(tokens, file_len);
 	return (tokens);
 }
