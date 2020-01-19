@@ -4,8 +4,8 @@ RED="\033[0;31m"
 GREEN="\033[0;32m"
 NC="\033[0m"
 
-MY_ASM="./my_asm"
-ORIG_ASM="./orig_asm"
+MY_ASM="../../asm/asm"
+ORIG_ASM="../asm"
 
 for file in *.s
 do
@@ -37,6 +37,8 @@ do
 			cat "${base}_mine.cor" | xxd > "tmp_cmp_mine"
 			cat "${base}_orig.cor" | xxd > "tmp_cmp_orig"
 			diff "tmp_cmp_mine" "tmp_cmp_orig"
+			rm "tmp_cmp_mine"
+			rm "tmp_cmp_orig"
 			echo -e ${RED}"FAIL"${NC}
 		else
 			echo -e ${GREEN}"SUCCESS"${NC}
