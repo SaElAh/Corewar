@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:08:53 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 19:06:03 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 22:19:36 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		label_cmp(void *l1, void *l2)
 	return (!ret ? label1->name_len - label2->name_len : ret);
 }
 
-void		add_label(t_asmdata *adat, t_token *cur, int line, int op_ref)
+void	add_label(t_asmdata *adat, t_token *cur, int line, int op_ref)
 {
 	t_label	label;
 

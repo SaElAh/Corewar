@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 21:05:30 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 21:40:07 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 22:27:01 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void		write_exec_file(t_asmdata *adat)
 		|| write(fd, adat->comment, COMMENT_LENGTH + NULL_SEP) < 0
 		|| write(fd, adat->prog, adat->prog_size) < 0)
 	{
-			perror("write");
-			ft_exit(NULL, E_WRITE_ERROR);
+		perror("write");
+		ft_exit(NULL, E_WRITE_ERROR);
 	}
 	close(fd);
 }

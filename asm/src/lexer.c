@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:05:53 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 21:33:11 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 22:27:25 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void		delimit_token(t_token *cur, t_list **tokens,
 	cur->len = line - cur->str;
 	if (cur->type == T_SEPARATOR)
 		cur->len += 1;
-	else if (cur->type == T_STRING && (size_t)cur->len + 1 <= ft_strlen(cur->str)
+	else if (cur->type == T_STRING
+		&& (size_t)cur->len + 1 <= ft_strlen(cur->str)
 		&& cur->str[cur->len] == '"')
 		cur->len += 1;
 	else if (cur->type == T_STRING)

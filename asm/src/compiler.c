@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 13:09:40 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 15:59:51 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 22:25:38 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ static int	parse_arg(unsigned char *arg_types, t_parsed_op *op,
 						unsigned int i, unsigned int *size)
 {
 	unsigned char	type;
-	int				value;
+	int				val;
 
-	value = 0;
+	val = 0;
 	if (op->args[i]->id == I_REGISTER)
 		type = REG_CODE;
 	else if (op->args[i]->id == I_DIRECT || op->args[i]->id == I_DIRECT_LABEL)
 		type = DIR_CODE;
 	else
 		type = IND_CODE;
-	if (op->args[i]->id != I_DIRECT_LABEL && op->args[i]->id != I_INDIRECT_LABEL)
-		value = ft_atoi(op->args[i]->str
-			+ (type == DIR_CODE || type == REG_CODE));
+	if (op->args[i]->id != I_DIRECT_LABEL
+		&& op->args[i]->id != I_INDIRECT_LABEL)
+		val = ft_atoi(op->args[i]->str + (type != IND_CODE));
 	else
 		op->label_add[i] = op->len;
 	if (type == IND_CODE
@@ -50,7 +50,7 @@ static int	parse_arg(unsigned char *arg_types, t_parsed_op *op,
 		*size = DIR_BYTE_SIZE;
 	if (arg_types)
 		*arg_types |= (type << (1 + 2 - i) * 2);
-	return (value);
+	return (val);
 }
 
 static void	compile_inst_args(t_asmdata *adat, t_parsed_op *op)

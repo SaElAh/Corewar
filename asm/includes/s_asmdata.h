@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:23:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 15:54:29 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 22:30:09 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ typedef struct		s_parsed_op
 }					t_parsed_op;
 
 /*
-**
 ** Main asm data structure:
 **
 ** file_name:	name of the input file (for the output)
@@ -51,7 +50,6 @@ typedef struct		s_parsed_op
 ** prog_size:	length of the prog code
 ** comment:		value of the ".comment" command
 ** prog:		executable code
-**
 */
 
 typedef struct		s_asmdata

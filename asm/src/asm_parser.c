@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 00:21:23 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 01:20:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 22:26:39 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		parse_command(t_asmdata *adat, t_list *tokens, int line)
 	command = tokens->content;
 	if (!(tokens = tokens->next))
 	{
-		ft_dprintf(2, "parser: command '%.*s' has no argument at line %d\n", 
+		ft_dprintf(2, "parser: command '%.*s' has no argument at line %d\n",
 			command->len, command->str, line + 1);
 		ft_exit(NULL, E_COMMAND_WITHOUT_ARGUMENT);
 	}
