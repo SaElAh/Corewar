@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:12:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 22:19:54 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 23:58:17 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,11 @@ void	error_unexpected_token(int len, const char *str, int line_id)
 	ft_dprintf(2, "parser: unexpected token '%.*s' at line %d\n",
 		len, str, line_id);
 	ft_exit(NULL, E_UNEXPECTED_TOKEN);
+}
+
+void	error_command_without_argument(int len, const char *str, int line_id)
+{
+	ft_dprintf(2, "parser: command '%.*s' has no argument at line %d\n",
+		len, str, line_id);
+	ft_exit(NULL, E_COMMAND_WITHOUT_ARGUMENT);
 }

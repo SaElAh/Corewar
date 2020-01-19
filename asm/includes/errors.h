@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:55:00 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 22:29:51 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 23:58:52 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ enum	e_errors {E_WRONG_USAGE = 1, E_WRONG_FILE, E_OPEN_FILE, E_READ_FILE,
 
 void	error_unknown_token(int len, const char *str, int line_id);
 void	error_unexpected_token(int len, const char *str, int line_id);
+void	error_command_without_argument(int len, const char *str, int line_id);
 
 #endif
