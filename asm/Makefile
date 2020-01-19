@@ -16,6 +16,7 @@ SRCC			=	add_label.c\
 					asm_parser.c\
 					compile_labels.c\
 					compiler.c\
+					debug.c\
 					errors.c\
 					g_op_tab.c\
 					get_word_id.c\
@@ -48,6 +49,7 @@ asm_parser.o: asm_parser.h s_asmdata.h lexer.h libft.h g_op_tab.h errors.h
 compile_labels.o: asm_parser.h s_asmdata.h lexer.h libft.h g_op_tab.h errors.h
 compiler.o: compiler.h asm_parser.h s_asmdata.h lexer.h libft.h g_op_tab.h\
 	errors.h
+debug.o: asm_parser.h s_asmdata.h lexer.h libft.h g_op_tab.h
 errors.o: libft.h errors.h
 g_op_tab.o: g_op_tab.h
 get_word_id.o: lexer.h libft.h g_op_tab.h errors.h

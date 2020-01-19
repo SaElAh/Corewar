@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 20:35:16 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 20:34:44 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 23:23:14 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 enum						e_token_type {T_WORD, T_STRING, T_START_STRING,
 	T_PART_STRING, T_END_STRING, T_SEPARATOR, T_NONE};
 
-# define TOKEN_TYPE_COUNT	4
+# define TOKEN_TYPE_COUNT	7
 
 enum						e_token_word_id {I_COMMAND, I_LABEL,
 	I_INSTRUCTION, I_REGISTER, I_DIRECT, I_INDIRECT, I_DIRECT_LABEL,
