@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:08:53 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 20:28:33 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 19:06:03 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,10 @@ int		label_cmp(void *l1, void *l2)
 void		add_label(t_asmdata *adat, t_token *cur, int line, int op_ref)
 {
 	t_label	label;
-	t_list	*lst;
 
 	label.name = cur->str;
 	label.name_len = cur->len - 1;
 	label.op_ref = op_ref;
 	label.line = line;
-	lst = ft_lstnew((void *)&label, sizeof(t_label));
-	ft_lst_sorted_insert(&adat->labels, lst, label_cmp);
-	if (lst->next && !label_cmp(lst->content, lst->next->content))
-	{
-		ft_dprintf(2, "parser: label '%.*s' declared \
-			twice (at line %d and %d)\n", label.name_len, label.name,
-			((t_label *)lst->next->content)->line, line);
-		ft_exit(NULL, E_LABEL_DECLARED_TWICE);
-	}
+	ft_lst_push_back(&adat->labels, &label, sizeof(t_label));
 }
