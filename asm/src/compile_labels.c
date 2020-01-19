@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 20:06:50 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 21:00:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 18:43:45 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ static void	replace_label_value(t_asmdata *adat, size_t i, size_t j)
 		ft_exit(NULL, E_NO_LABEL_MATCH);
 	}
 	matched_label = match->content;
-	value =	adat->ops[matched_label->op_ref].address - adat->ops[i].address;
+	if (matched_label->op_ref < (int)adat->ops_len)
+		value =	adat->ops[matched_label->op_ref].address - adat->ops[i].address;
+	else
+		value = adat->prog_size - adat->ops[i].address;
 	write_label_bytes(adat, adat->ops[i].address + adat->ops[i].label_add[j],
 		value, adat->ops[i].args[j]->id == I_INDIRECT_LABEL 
 		|| g_op_tab[adat->ops[i].op_code - 1].mod_tdir_size ? IND_BYTE_SIZE

@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 17:34:14 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 19:19:52 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 18:36:25 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static void		print_tokens(t_list **tokens, int len) //TEMP
 		}
 	}
 }
-*/
 
 void	print_ops(t_parsed_op *ops, size_t ops_len) //TEMP
 {
@@ -84,6 +83,7 @@ void	print_ops(t_parsed_op *ops, size_t ops_len) //TEMP
 		++i;
 	}
 }
+*/
 
 void	print_labels(t_list *labels) //TEMP
 {
@@ -97,7 +97,7 @@ void	print_labels(t_list *labels) //TEMP
 		labels = labels->next;
 	}
 }
-
+/*
 void	print_hex_prog(t_asmdata *adat) //TEMP
 {
 	unsigned int	address;
@@ -117,6 +117,91 @@ void	print_hex_prog(t_asmdata *adat) //TEMP
 		}
 		ft_printf("\n");
 		address += 16;
+	}
+}
+*/
+
+void	print_hex_ops(t_asmdata *adat) //TEMP
+{
+	size_t			i;
+	unsigned int	j;
+	unsigned int	len;
+	unsigned int	address;
+	unsigned char	op_code;
+	unsigned char	ocp;
+	unsigned char	type;
+	size_t			arg_size;
+	unsigned int	k;
+
+	i = 0;
+	while (i < adat->ops_len)
+	{
+		len = adat->ops[i].len;
+		address = adat->ops[i].address;
+		op_code = adat->ops[i].op_code - 1;
+		j = 0;
+		ft_printf("%.8x (op: %zu, len = %u): ", address, i + 1, len);
+		while (j < len)
+		{
+			ft_printf("%.2x", adat->prog[address + j++]);
+			if (arg_size)
+				ft_printf(" ");
+		}
+		j = 0;
+		ft_printf("\n[ op_code = %.2x", adat->prog[address + j++]);
+		if (g_op_tab[op_code].arg_type_code)
+		{
+			ocp = adat->prog[address + j];
+			ft_printf(", OCP = %.2x", adat->prog[address + j++]);
+		}
+		else
+			ocp = 0;
+		k = 0;
+		while (k < g_op_tab[op_code].argc)
+		{
+			if (ocp)
+			{
+				type = ocp >> 6;
+				ocp <<= 2;
+			}
+			else
+			{
+				if (g_op_tab[op_code].arg_types[k] == T_REG)
+					type = REG_CODE;
+				if (g_op_tab[op_code].arg_types[k] == T_DIR)
+					type = DIR_CODE;
+				else
+					type = IND_CODE;
+			}
+			arg_size = 0;
+			switch (type)
+			{
+					case REG_CODE:
+						arg_size = REG_BYTE_SIZE;
+						break ;
+					case DIR_CODE:
+						arg_size = g_op_tab[op_code].mod_tdir_size ?
+							IND_BYTE_SIZE : DIR_BYTE_SIZE;
+						break ;
+					case IND_CODE:
+						arg_size = IND_BYTE_SIZE;
+						break ;
+			}
+			ft_printf(", %s ", type == REG_CODE ? "REG" : type == DIR_CODE ?
+				"DIR" : "IND");
+			if (adat->ops[i].label_add[k])
+				ft_printf("(label) ");
+			ft_printf("= ");
+			while (arg_size--)
+			{
+				ft_printf("%.2x", adat->prog[address + j++]);
+				if (arg_size)
+					ft_printf(" ");
+			}
+			++k;
+		}
+		ft_printf(" ]\n");
+		++i;
 	}
 }
 
@@ -168,10 +253,11 @@ int			main(int argc, char **argv)
 	adat.tokens = lexer(adat.file, adat.file_len);
 //	print_tokens(adat.tokens, adat.file_len); //TEMP
 	asm_parser(&adat);
-	print_ops(adat.ops, adat.ops_len); //TEMP
+//	print_ops(adat.ops, adat.ops_len); //TEMP
 	print_labels(adat.labels); //TEMP
 	compiler(&adat);
-	print_hex_prog(&adat); //TEMP
+//	print_hex_prog(&adat); //TEMP
+	print_hex_ops(&adat); //TEMP
 	ft_heap_collector(NULL, FT_COLLEC_FREE);
 	return (0);
 }
