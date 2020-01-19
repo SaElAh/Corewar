@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:23:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 22:30:09 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 22:50:34 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define S_ASMDATA_H
 
 # include "lexer.h"
-# include "op.h"
+# include "g_op_tab.h"
 
 /*
 ** s_parsed_op:

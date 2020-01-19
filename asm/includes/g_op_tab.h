@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op.h                                               :+:      :+:    :+:   */
+/*   g_op_tab.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/09 14:39:35 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 22:45:06 by yforeau          ###   ########.fr       */
+/*   Created: 2020/01/19 22:48:12 by yforeau           #+#    #+#             */
+/*   Updated: 2020/01/19 22:48:27 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OP_H
-# define OP_H
+#ifndef G_OP_TAB_H
+# define G_OP_TAB_H
 
 /*
 ** size of each argument type in the executable (in bytes)

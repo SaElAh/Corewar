@@ -6,12 +6,12 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 22:54:52 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/17 21:52:03 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 22:49:41 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-#include "op.h"
+#include "g_op_tab.h"
 #include "errors.h"
 
 static int				check_instruction(t_token *cur)
