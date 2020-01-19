@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:23:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 18:08:42 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 15:54:29 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct		s_asmdata
 	char			prog_name[PROG_NAME_LENGTH + NULL_SEP];
 	unsigned int	prog_size;
 	char			comment[COMMENT_LENGTH + NULL_SEP];
-	unsigned char	prog[CHAMP_MAX_SIZE];
+	unsigned char	*prog;
 }					t_asmdata;
 
 #endif

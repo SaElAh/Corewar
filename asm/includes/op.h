@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 14:39:35 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 19:35:16 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/19 15:57:14 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define IND_BYTE_SIZE			2
 # define REG_BYTE_SIZE			1
 # define DIR_BYTE_SIZE			REG_SIZE
+# define OP_BYTE_SIZE_MAX		18
 
 
 # define REG_CODE				1
