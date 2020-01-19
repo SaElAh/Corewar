@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+NC="\033[0m"
+
+MY_ASM="./my_asm"
+ORIG_ASM="./orig_asm"
+
+for file in *.s
+do
+	my_error=0
+	orig_error=0
+	base="${file%.s}"
+	echo "Testing $file..."
+	$MY_ASM $file &> /dev/null
+	if [ $? == 0 ]; then
+		mv "${base}.cor" "${base}_mine.cor"
+	else
+		my_error=1
+	fi
+	$ORIG_ASM $file &> /dev/null
+	if [ $? == 0 ]; then
+		mv "${base}.cor" "${base}_orig.cor"
+	else
+		orig_error=1
+	fi
+	if [ $my_error != 0 -a $orig_error == 0 ]; then
+		echo -e ${RED}"'$MY_ASM'" failed but "'$ORIG_ASM'" succeeded${NC}
+	elif [ $my_error == 0 -a $orig_error != 0 ]; then
+		echo -e ${RED}"'$ORIG_ASM'" failed but "'$MY_ASM'" succeeded${NC}
+	elif [ $my_error != 0 -a $orig_error != 0 ]; then
+		echo -e ${GREEN}"both '$ORIG_ASM' and '$MY_ASM' failed"${NC}
+	else
+		diff "${base}_mine.cor" "${base}_orig.cor" > /dev/null
+		if [ $? != 0 ]; then
+			cat "${base}_mine.cor" | xxd > "tmp_cmp_mine"
+			cat "${base}_orig.cor" | xxd > "tmp_cmp_orig"
+			diff "tmp_cmp_mine" "tmp_cmp_orig"
+			echo -e ${RED}"FAIL"${NC}
+		else
+			echo -e ${GREEN}"SUCCESS"${NC}
+		fi
+	fi
+done
