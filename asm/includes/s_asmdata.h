@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 15:23:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 22:50:34 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/31 18:23:33 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct		s_asmdata
 	t_parsed_op		*ops;
 	size_t			ops_len;
 	t_list			*labels;
+	size_t			name_cmd_count;
+	size_t			comment_cmd_count;
 	char			prog_name[PROG_NAME_LENGTH + NULL_SEP];
 	unsigned int	prog_size;
 	char			comment[COMMENT_LENGTH + NULL_SEP];

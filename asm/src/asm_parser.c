@@ -6,29 +6,31 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 00:21:23 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/20 00:06:40 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/01/31 18:36:41 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm_parser.h"
 #include "errors.h"
 
-static void		parse_command(t_asmdata *adat, t_list *tokens, int line)
+static void		update_command_value(t_token *command, t_token *value,
+					t_asmdata *adat)
 {
-	t_token		*command;
-	t_token		*value;
 	char		*dest;
 	int			maxlen;
+	int			name_cmd;
 
-	value = NULL;
-	command = tokens->content;
-	if (!(tokens = tokens->next))
-		error_command_without_argument(command->len, command->str, line + 1);
-	else if ((value = tokens->content)->type != T_STRING)
-		error_unexpected_token(value->len, value->str, line + 1);
-	dest = !ft_strncmp(NAME_CMD_STRING, command->str, command->len) ?
-		adat->prog_name : adat->comment;
-	maxlen = dest == adat->prog_name ? PROG_NAME_LENGTH : COMMENT_LENGTH;
+	name_cmd = !ft_strncmp(NAME_CMD_STRING, command->str, command->len);
+	dest = name_cmd ? adat->prog_name : adat->comment;
+	maxlen = name_cmd ? PROG_NAME_LENGTH : COMMENT_LENGTH;
+	if ((name_cmd && adat->name_cmd_count)
+		|| (!name_cmd && adat->comment_cmd_count))
+		ft_dprintf(2, "warning: parser: multiple '%.*s' commands\n",
+			command->len, command->str);
+	if (name_cmd)
+		adat->name_cmd_count = 1;
+	else
+		adat->comment_cmd_count = 1;
 	ft_strncpy(dest, value->str + 1, maxlen);
 	if (value->len - 2 < maxlen)
 		dest[value->len - 2] = 0;
@@ -36,6 +38,20 @@ static void		parse_command(t_asmdata *adat, t_list *tokens, int line)
 		ft_dprintf(2, "warning: parser: the '%.*s' command argument is too\n"\
 			"long so it is going to be truncated to %d characters\n",
 			command->len, command->str, maxlen);
+}
+
+static void		parse_command(t_asmdata *adat, t_list *tokens, int line)
+{
+	t_token		*command;
+	t_token		*value;
+
+	value = NULL;
+	command = tokens->content;
+	if (!(tokens = tokens->next))
+		error_command_without_argument(command->len, command->str, line + 1);
+	else if ((value = tokens->content)->type != T_STRING)
+		error_unexpected_token(value->len, value->str, line + 1);
+	update_command_value(command, value, adat);
 	if (tokens->next)
 		error_unexpected_token(((t_token *)tokens->next)->len,
 			((t_token *)tokens->next)->str, line + 1);
@@ -106,4 +122,8 @@ void			asm_parser(t_asmdata *adat)
 			parse_line(adat, line, &op_ref);
 		++line;
 	}
+	if (!adat->name_cmd_count)
+		ft_exit("error: no name command in file", E_NO_NAME);
+	else if (!adat->comment_cmd_count)
+		ft_exit("error: no comment command in file", E_NO_COMMENT);
 }
