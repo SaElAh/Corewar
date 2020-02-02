@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 00:21:23 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/31 18:36:41 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/02 16:53:42 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static void		parse_command(t_asmdata *adat, t_list *tokens, int line)
 		error_unexpected_token(value->len, value->str, line + 1);
 	update_command_value(command, value, adat);
 	if (tokens->next)
-		error_unexpected_token(((t_token *)tokens->next)->len,
-			((t_token *)tokens->next)->str, line + 1);
+		error_unexpected_token(((t_token *)tokens->next->content)->len,
+			((t_token *)tokens->next->content)->str, line + 1);
 }
 
 static void		parse_line(t_asmdata *adat, int line, int *op_ref)
