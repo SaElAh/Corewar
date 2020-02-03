@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:12:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 23:58:17 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/03 16:37:55 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	error_unknown_token(int len, const char *str, int line_id)
 {
 	ft_dprintf(2, "lexer: unknown token '%.*s' at line %d\n",
-		len, str, line_id);
+		len, str, line_id + 1);
 	ft_exit(NULL, E_UNKNOWN_TOKEN);
 }
 
