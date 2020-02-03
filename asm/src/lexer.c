@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 21:05:53 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 22:49:56 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/03 13:18:27 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,17 @@ static void		init_token(t_token *cur, const char *line)
 	cur->str = (char *)line;
 }
 
-static void		delimit_token(t_token *cur, t_list **tokens,
-	const char *line, int line_id)
+static t_token	*delimit_token(t_token *cur, t_list **tokens,
+								const char *line, int line_id)
 {
+	t_token	*ret;
+
 	if (cur->type == T_NONE)
-		return ;
+		return (NULL);
 	cur->len = line - cur->str;
 	if (cur->type == T_SEPARATOR)
+		cur->len += 1;
+	else if (cur->type == T_WORD && *line == ':' && !*tokens)
 		cur->len += 1;
 	else if (cur->type == T_STRING
 		&& (size_t)cur->len + 1 <= ft_strlen(cur->str)
@@ -49,13 +53,16 @@ static void		delimit_token(t_token *cur, t_list **tokens,
 	else if (cur->type == T_STRING)
 		cur->type = T_START_STRING;
 	cur->id = cur->type == T_WORD ? get_word_id(cur, line_id) : I_NONE;
-	ft_lst_push_back(tokens, cur, sizeof(t_token));
+	ret = (t_token *)ft_lst_push_back(tokens, cur, sizeof(t_token))->content;
 	reset_token(cur);
+	return (ret);
 }
 
+//TODO: normify
 t_list			*tokenize(const char *line, int line_id, int *multiline_string)
 {
 	t_token	cur;
+	t_token	*last;
 	t_list	*tokens;
 
 	tokens = NULL;
@@ -64,6 +71,8 @@ t_list			*tokenize(const char *line, int line_id, int *multiline_string)
 	{
 		if (cur.type == T_WORD && ft_strchr(" \t,\"%", *line))
 			delimit_token(&cur, &tokens, line, line_id);
+		else if (cur.type == T_WORD && !tokens && *line == ':')
+			delimit_token(&cur, &tokens, line++, line_id);
 		else if (cur.type == T_STRING && *line == '"')
 			delimit_token(&cur, &tokens, line++, line_id);
 		else
@@ -75,10 +84,8 @@ t_list			*tokenize(const char *line, int line_id, int *multiline_string)
 			++line;
 		}
 	}
-	delimit_token(&cur, &tokens, line, line_id);
-	if (tokens
-		&& ((t_token *)ft_lst_last(tokens)->content)->type == T_START_STRING)
-		*multiline_string = 1;
+	last = delimit_token(&cur, &tokens, line, line_id);
+	*multiline_string = last && last->type == T_START_STRING;
 	return (tokens);
 }
 

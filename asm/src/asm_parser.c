@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 00:21:23 by yforeau           #+#    #+#             */
-/*   Updated: 2020/02/02 16:53:42 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/03 12:45:26 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,21 @@ static void		update_command_value(t_token *command, t_token *value,
 			command->len, command->str, maxlen);
 }
 
-static void		parse_command(t_asmdata *adat, t_list *tokens, int line)
+static void		parse_command(t_asmdata *adat, t_list **tokens, int line)
 {
 	t_token		*command;
 	t_token		*value;
 
 	value = NULL;
-	command = tokens->content;
-	if (!(tokens = tokens->next))
+	command = (*tokens)->content;
+	if (!((*tokens) = (*tokens)->next))
 		error_command_without_argument(command->len, command->str, line + 1);
-	else if ((value = tokens->content)->type != T_STRING)
+	else if ((value = (*tokens)->content)->type != T_STRING)
 		error_unexpected_token(value->len, value->str, line + 1);
 	update_command_value(command, value, adat);
-	if (tokens->next)
-		error_unexpected_token(((t_token *)tokens->next->content)->len,
-			((t_token *)tokens->next->content)->str, line + 1);
 }
+		
+#include "debug.h" //TEMP
 
 static void		parse_line(t_asmdata *adat, int line, int *op_ref)
 {
@@ -66,15 +65,15 @@ static void		parse_line(t_asmdata *adat, int line, int *op_ref)
 	cur = tokens->content;
 	if (cur->type != T_WORD)
 		error_unexpected_token(cur->len, cur->str, line + 1);
-	else if (cur->id == I_COMMAND)
-		return (parse_command(adat, tokens, line));
-	else if (cur->id == I_LABEL)
-		while (tokens && (cur = tokens->content)->id == I_LABEL)
-		{
+	else if (cur->id != I_INSTRUCTION)
+	{
+		if (cur->id == I_COMMAND)
+			parse_command(adat, &tokens, line);
+		else if (cur->id == I_LABEL)
 			add_label(adat, cur, line, *op_ref + 1);
-			tokens = tokens->next;
-		}
-	cur = tokens ? tokens->content : NULL;
+		tokens = tokens->next;
+		cur = tokens ? tokens->content : NULL;
+	}
 	if (cur && cur->id == I_INSTRUCTION)
 		parse_instruction(adat, tokens, line, ++(*op_ref));
 	else if (cur)
