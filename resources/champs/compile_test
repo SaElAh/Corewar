@@ -6,8 +6,13 @@ NC="\033[0m"
 
 MY_ASM="../../asm/asm"
 ORIG_ASM="../asm"
+DIR="."
+if [ "$1" != "" ]; then
+	DIR="$1"
+fi
+DIR+="/"
 
-for file in *.s
+for file in $DIR*.s
 do
 	my_error=0
 	orig_error=0
