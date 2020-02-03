@@ -24,6 +24,7 @@ SRCC			=	add_label.c\
 					lexer.c\
 					main.c\
 					parse_instruction.c\
+					utils.c\
 					write_exec_file.c\
 
 ODIR			=	obj
@@ -48,7 +49,7 @@ add_label.o: asm_parser.h s_asmdata.h lexer.h libft.h g_op_tab.h errors.h
 asm_parser.o: asm_parser.h s_asmdata.h lexer.h libft.h g_op_tab.h errors.h
 compile_labels.o: asm_parser.h s_asmdata.h lexer.h libft.h g_op_tab.h errors.h
 compiler.o: compiler.h asm_parser.h s_asmdata.h lexer.h libft.h g_op_tab.h\
-	errors.h
+	errors.h utils.h
 debug.o: asm_parser.h s_asmdata.h lexer.h libft.h g_op_tab.h
 errors.o: libft.h errors.h
 g_op_tab.o: g_op_tab.h

@@ -6,12 +6,13 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 13:09:40 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 22:25:38 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/03 21:27:09 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "compiler.h"
 #include "errors.h"
+#include "utils.h"
 
 static void	write_arg_bytes(t_asmdata *adat, t_parsed_op *op,
 				int value, unsigned int size)
@@ -38,7 +39,7 @@ static int	parse_arg(unsigned char *arg_types, t_parsed_op *op,
 		type = IND_CODE;
 	if (op->args[i]->id != I_DIRECT_LABEL
 		&& op->args[i]->id != I_INDIRECT_LABEL)
-		val = ft_atoi(op->args[i]->str + (type != IND_CODE));
+		val = ft_std_atoi(op->args[i]->str + (type != IND_CODE));
 	else
 		op->label_add[i] = op->len;
 	if (type == IND_CODE
