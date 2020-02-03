@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 21:43:17 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/18 00:50:28 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/03 16:56:17 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	expect_end(t_asmdata *adat, int op_ref, t_list *tokens, int line)
 	else if (tokens->next)
 	{
 		cur = tokens->next->content;
-		error_unexpected_token(cur->len, cur->str, line + 1);
+		error_unexpected_token(cur->len, cur->str, line);
 	}
 }
 
@@ -42,7 +42,7 @@ static int	expect_arg(t_asmdata *adat, int op_ref, t_token *cur, int line)
 	argc = &adat->ops[op_ref].argc;
 	arg_types = g_op_tab[op_code - 1].arg_types[*argc];
 	if (cur->type != T_WORD)
-		error_unexpected_token(cur->len, cur->str, line + 1);
+		error_unexpected_token(cur->len, cur->str, line);
 	if ((((arg_types & T_REG) && cur->id == I_REGISTER))
 		|| ((arg_types & T_DIR)
 		&& (cur->id == I_DIRECT || cur->id == I_DIRECT_LABEL))

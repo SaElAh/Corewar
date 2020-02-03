@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 20:15:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/02/03 13:23:24 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/03 17:07:43 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static size_t	fetch_and_fuse(t_list **tokens, size_t i,
 		token = line->content;
 		len += token->len + (token->type != T_END_STRING);
 		if (line->next && (token = line->next->content))
-			error_unexpected_token(token->len, token->str, i + 1);
+			error_unexpected_token(token->len, token->str, i);
 		line = ++i < file_len && token->type != T_END_STRING ? tokens[i] : NULL;
 	}
 	if (token->type != T_END_STRING)

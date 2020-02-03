@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 00:21:23 by yforeau           #+#    #+#             */
-/*   Updated: 2020/02/03 12:45:26 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/03 16:46:00 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,12 @@ static void		parse_command(t_asmdata *adat, t_list **tokens, int line)
 	value = NULL;
 	command = (*tokens)->content;
 	if (!((*tokens) = (*tokens)->next))
-		error_command_without_argument(command->len, command->str, line + 1);
+		error_command_without_argument(command->len, command->str, line);
 	else if ((value = (*tokens)->content)->type != T_STRING)
-		error_unexpected_token(value->len, value->str, line + 1);
+		error_unexpected_token(value->len, value->str, line);
 	update_command_value(command, value, adat);
 }
 		
-#include "debug.h" //TEMP
-
 static void		parse_line(t_asmdata *adat, int line, int *op_ref)
 {
 	t_list	*tokens;
@@ -64,7 +62,7 @@ static void		parse_line(t_asmdata *adat, int line, int *op_ref)
 	tokens = adat->tokens[line];
 	cur = tokens->content;
 	if (cur->type != T_WORD)
-		error_unexpected_token(cur->len, cur->str, line + 1);
+		error_unexpected_token(cur->len, cur->str, line);
 	else if (cur->id != I_INSTRUCTION)
 	{
 		if (cur->id == I_COMMAND)
@@ -77,7 +75,7 @@ static void		parse_line(t_asmdata *adat, int line, int *op_ref)
 	if (cur && cur->id == I_INSTRUCTION)
 		parse_instruction(adat, tokens, line, ++(*op_ref));
 	else if (cur)
-		error_unexpected_token(cur->len, cur->str, line + 1);
+		error_unexpected_token(cur->len, cur->str, line);
 }
 
 static size_t	count_ops(t_list **tokens, size_t file_len)
