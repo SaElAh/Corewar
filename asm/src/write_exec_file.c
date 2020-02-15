@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 21:05:30 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/19 22:27:01 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/15 13:31:58 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void		write_exec_file(t_asmdata *adat)
 	len = ft_strlen(adat->file_name);
 	name = ft_strncpy(ft_strnew(len + 2), adat->file_name, len - 2);
 	ft_strcat(name, ".cor");
+	ft_printf("Writing output program to %s\n", name);
 	if ((fd = open(name, O_CREAT | O_WRONLY, 0666)) == -1)
 	{
 		perror("open");

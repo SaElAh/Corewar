@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 20:59:54 by yforeau           #+#    #+#             */
-/*   Updated: 2020/02/03 21:42:07 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/15 13:41:22 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static long int	ft_strtol(const char *nptr)
 		nptr++;
 	if (*nptr == '-' || *nptr == '+')
 		neg = *nptr++ == '-';
-	cutoff = LONG_MAX + neg;
+	cutoff = (unsigned long)LONG_MAX + neg;
 	cutlim = (cutoff % 10) + 48;
 	cutoff /= 10;
 	while (*nptr > 47 && *nptr < 58
