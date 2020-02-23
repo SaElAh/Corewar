@@ -6,11 +6,12 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 17:05:23 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 18:02:33 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:48:13 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
+#include "libft.h"
 
 void			init_colors(void)
 {
@@ -42,8 +43,12 @@ void			get_info(t_visu *visu, t_cor *cor)
 	WINDOW	*vm;
 	WINDOW	*dash;
 
-	vm = subwin(stdscr, LINES, 272, 0, 0);
-	dash = subwin(stdscr, LINES, 91, 0, 272);
+	if (!(vm = subwin(stdscr, LINES, 272, 0, 0)))
+		ft_exit("subwin: failed to create vm sub window", EXIT_FAILURE);
+	ft_heap_collector((void *)vm, FT_COLLEC_ADD);
+	if (!(dash = subwin(stdscr, LINES, 91, 0, 272)))
+		ft_exit("subwin: failed to create dash sub window", EXIT_FAILURE);
+	ft_heap_collector((void *)dash, FT_COLLEC_ADD);
 	init_visu(visu);
 	visu->cor = cor;
 	visu->vm = vm;

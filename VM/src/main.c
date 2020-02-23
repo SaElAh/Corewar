@@ -1,5 +1,6 @@
 
 #include "op.h"
+#include "libft.h"
 
 int		main(int ac, char **av)
 {
@@ -16,11 +17,6 @@ int		main(int ac, char **av)
 	if (corewar.graphic)
 		ft_visu(&corewar, &visu);
 	ft_exec_champs(&corewar, &visu);
-	if (corewar.graphic)
-	{
-		endwin();
-		free(visu.vm);
-		free(visu.dash);
-	}
+	ft_atexit(NULL);
 	return (0);
 }
