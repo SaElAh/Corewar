@@ -37,9 +37,9 @@ int		read_binary(char *av, t_champ *champ)
 	int		check_err;
 
 	check_err = 0;
-	if ((file = open(av, O_RDONLY)) < 0)
+	if ((file = open(av, O_RDONLY, O_NOFOLLOW | O_NONBLOCK)) < 0)
 	{
-		printf("%s: %s\n", av, strerror(errno));
+		ft_printf("%s: %s\n", av, strerror(errno));
 		check_err = 1;
 	}
 	if (check_err || check_len_file(file, av) || read_magic(file, champ)
@@ -57,7 +57,7 @@ int		add_champ(char *champ_file, t_cor *cor)
 	i = cor->nb_champs;
 	if (++cor->nb_champs > MAX_PLAYERS)
 	{
-		dprintf(2, "too many champions, only %d allowed\n", MAX_PLAYERS);
+		ft_dprintf(2, "too many champions, only %d allowed\n", MAX_PLAYERS);
 		return (1);
 	}
 	cor->champ[i].id_champ = !cor->champ[i].id_champ ?
@@ -65,7 +65,7 @@ int		add_champ(char *champ_file, t_cor *cor)
 	cor->champ[i].index_champ = i;
 	if (read_binary(champ_file, &cor->champ[i]))
 	{
-		dprintf(2, "error while reading champion file '%s'\n", champ_file);
+		ft_dprintf(2, "error while reading champion file '%s'\n", champ_file);
 		return (1);
 	}
 	return (0);
@@ -80,7 +80,7 @@ void	parse_option(int c, char *arg, t_cor *cor)
 	else
 	{
 		if ((value = ft_atol(arg)) < 0)
-			dprintf(2, "invalid value for option '%c': '%s'\n", c, arg);
+			ft_dprintf(2, "invalid value for option '%c': '%s'\n", c, arg);
 		else if (c == 'd')
 		{
 			cor->nb_cycles_dump = value;
@@ -105,9 +105,9 @@ int		parse_arguments(int argc, char **argv, t_cor *cor)
 		if ((c = getopt(argc, argv, ":d:s:v:n:g")) != -1)
 		{
 			if (c == ':')
-				dprintf(2, "no argument given for '%c' option\n", optopt);
+				ft_dprintf(2, "no argument given for '%c' option\n", optopt);
 			else if (c == '?')
-				dprintf(2, "unknown option: '%c'\n", optopt);
+				ft_dprintf(2, "unknown option: '%c'\n", optopt);
 			else
 				parse_option(c, optarg, cor);
 		}

@@ -10,7 +10,7 @@ void			ft_free_process_node(t_pro **process)
 	(*process)->prev ? (*process)->prev->next = (*process)->next : 0;
 	(*process)->next ? (*process)->next->prev = (*process)->prev : 0;
 	tmp = (*process)->next;
-	free(*process);
+	ft_memdel((void **)process);
 	(*process) = tmp;
 }
 
@@ -27,7 +27,7 @@ uint32_t		sum_lives(t_cor *cor, int ind)
 		if (!tmp->nb_lives)
 		{
 			if (cor->verbose & VERBOSE_DEATH)
-				printf("Process %i hasn't lived for %i cycles (CTD %i)\n",
+				ft_printf("Process %i hasn't lived for %i cycles (CTD %i)\n",
 tmp->index_pro, cor->nb_cycles - tmp->last_cycle_live, cor->cycles_to_die_ref);
 			if (cor->tab_process[ind] == tmp)
 			{
@@ -59,4 +59,30 @@ void			re_init_lives_champs(t_cor *cor)
 		}
 		i++;
 	}
+}
+
+int				ft_check_lives(t_cor *cor)
+{
+	int i;
+	int	cpt;
+
+	cpt = 0;
+	cor->sum_lives = 0;
+	i = cor->curr_ind_process;
+	while (cpt < SIZE_TAB_PRO)
+	{
+		cor->sum_lives += sum_lives(cor, i);
+		i = (i + 1) % SIZE_TAB_PRO;
+		cpt++;
+	}
+	if (!cor->sum_lives)
+		return (1);
+	else
+	{
+		if (cor->sum_lives >= NBR_LIVE || cor->nb_checks >= MAX_CHECKS)
+			re_init_check_utils(cor, 2);
+		else
+			re_init_check_utils(cor, 1);
+	}
+	return (0);
 }

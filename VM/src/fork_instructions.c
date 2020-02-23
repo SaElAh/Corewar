@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations_3.c                                     :+:      :+:    :+:   */
+/*   fork_instructions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 16:41:30 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/02 16:50:18 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 17:54:31 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static t_pro	*create_forked_process(t_cor *cor, t_pro *forking_pro)
 {
 	t_pro	*new;
 
-	if (!(new = (t_pro *)malloc(sizeof(t_pro))))
+	if (!(new = (t_pro *)ft_secmalloc(sizeof(t_pro))))
 		return (NULL);
-	memcpy((void *)new, (void *)forking_pro, sizeof(t_pro));
+	ft_memcpy((void *)new, (void *)forking_pro, sizeof(t_pro));
 	cor->biggest_ind_pro += 1;
 	new->index_pro = cor->biggest_ind_pro;
 	new->next = cor->tab_process[cor->curr_ind_process];

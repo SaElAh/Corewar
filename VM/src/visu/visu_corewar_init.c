@@ -6,16 +6,16 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 17:05:23 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 16:41:23 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/23 18:02:33 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 
-void	init_colors(void)
+void			init_colors(void)
 {
 	start_color();
-	init_pair(1, COLOR_RED, COLOR_BLACK);
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
 	init_pair(2, COLOR_CYAN, COLOR_BLACK);
 	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
@@ -24,12 +24,12 @@ void	init_colors(void)
 	init_pair(7, COLOR_WHITE, COLOR_BLACK);
 }
 
-static void	init_visu(t_visu *visu)
+static void		init_visu(t_visu *visu)
 {
 	size_t	i;
 
 	i = 0;
-	memset(visu, 0, sizeof(t_visu));
+	ft_memset(visu, 0, sizeof(t_visu));
 	while (i < MEMORY)
 	{
 		visu->owner[i].owner = EMPTY;
@@ -37,7 +37,7 @@ static void	init_visu(t_visu *visu)
 	}
 }
 
-void	get_info(t_visu *visu, t_cor *cor)
+void			get_info(t_visu *visu, t_cor *cor)
 {
 	WINDOW	*vm;
 	WINDOW	*dash;

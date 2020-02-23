@@ -16,7 +16,7 @@ int		read_magic(int file, t_champ *champ)
 	magic = 0xf383ea00;
 	if (read(file, buffer, 4) < 0)
 	{
-		printf("ERROR IN READ magic\n");
+		ft_printf("ERROR IN READ magic\n");
 		return (1);
 	}
 	if (lseek(file, 0, SEEK_CUR) != 4
@@ -25,7 +25,7 @@ int		read_magic(int file, t_champ *champ)
 		|| ((magic >> 16) & 0xff) != (buffer[2] & 0xff)
 		|| ((magic >> 24) & 0xff) != (buffer[3] & 0xff))
 	{
-		printf("PB WITH THE MAGIC NUMBER\n");
+		ft_printf("PB WITH THE MAGIC NUMBER\n");
 		return (1);
 	}
 	champ->header.magic = COREWAR_EXEC_MAGIC;
@@ -38,15 +38,15 @@ int		read_prog_name(int file, t_champ *champ)
 
 	if (read(file, buffer, PROG_NAME_LENGTH) < 0)
 	{
-		printf("ERROR IN READ prog name\n");
+		ft_printf("ERROR IN READ prog name\n");
 		return (1);
 	}
 	if (lseek(file, 4, SEEK_CUR) != sizeof(uint32_t) + PROG_NAME_LENGTH + 4)
 	{
-		printf("PB WITH THE PROG NAME\n");
+		ft_printf("PB WITH THE PROG NAME\n");
 		return (1);
 	}
-	memcpy(&champ->header.prog_name, buffer, PROG_NAME_LENGTH);
+	ft_memcpy(&champ->header.prog_name, buffer, PROG_NAME_LENGTH);
 	return (0);
 }
 
@@ -56,12 +56,12 @@ int		read_prog_size(int file, t_champ *champ)
 
 	if (read(file, buffer, 4) < 0)
 	{
-		printf("ERROR IN READ prog size\n");
+		ft_printf("ERROR IN READ prog size\n");
 		return (1);
 	}
 	if (lseek(file, 0, SEEK_CUR) != sizeof(uint32_t) * 2 + PROG_NAME_LENGTH + 4)
 	{
-		printf("ERROR IN PROG SIZE\n");
+		ft_printf("ERROR IN PROG SIZE\n");
 		return (1);
 	}
 	champ->header.prog_size = ((0xff & buffer[0]) << 24)
@@ -76,15 +76,15 @@ int		read_comment(int file, t_champ *champ)
 
 	if (read(file, buffer, COMMENT_LENGTH) < 0)
 	{
-		printf("ERROR IN READ comment\n");
+		ft_printf("ERROR IN READ comment\n");
 		return (1);
 	}
 	if (lseek(file, 4, SEEK_CUR) != sizeof(t_header))
 	{
-		printf("ERROR IN COMMENT\n");
+		ft_printf("ERROR IN COMMENT\n");
 		return (1);
 	}
-	memcpy(&champ->header.comment, buffer, COMMENT_LENGTH);
+	ft_memcpy(&champ->header.comment, buffer, COMMENT_LENGTH);
 	return (0);
 }
 
@@ -95,19 +95,19 @@ int		read_prog(int file, t_champ *champ)
 
 	if ((len = read(file, buffer, CHAMP_MAX_SIZE * 2)) < 0)
 	{
-		printf("ERROR IN READ read prog\n");
+		ft_printf("ERROR IN READ read prog\n");
 		return (1);
 	}
 	if (len > CHAMP_MAX_SIZE || len != champ->header.prog_size)
 	{
 		if (len > CHAMP_MAX_SIZE)
-			printf("Error: File has too large a code (%u > %u)\n",
+			ft_printf("Error: File has too large a code (%u > %u)\n",
 					len, CHAMP_MAX_SIZE);
 		else
-			printf("Error: File has a code size that differs from what\
+			ft_printf("Error: File has a code size that differs from what\
 its header says\n");
 		return (1);
 	}
-	memcpy(&champ->prog, buffer, len);
+	ft_memcpy(&champ->prog, buffer, len);
 	return (0);
 }

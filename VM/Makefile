@@ -61,10 +61,10 @@ vpath			%.c	$(SRCDIR)
 all: $(NAME)
 
 $(NAME): $(SUB1D)/libft.a $(ODIR) $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $(patsubst %.o,$(ODIR)/%.o,$(OBJ)) $(LIBS)
+	@$(CC) $(CFLAGS) -o $@ $(patsubst %.o,$(ODIR)/%.o,$(OBJ)) $(LIBS)
 
 $(SUB1D)/libft.a:
-	make -C $(SUB1D)
+	@make -C $(SUB1D)
 
 aff_instruction.o: op.h libft.h
 check_champs.o: op.h libft.h
@@ -96,7 +96,7 @@ visu_corewar_utils.o: op.h libft.h
 zjmp_instruction.o: op.h libft.h
 %.o: %.c
 	@mkdir -p $(ODIR)
-	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
+	@$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
 
 $(ODIR):
 	mkdir -p $@
@@ -104,8 +104,8 @@ $(ODIR):
 ############################## CLEANUP #########################################
 
 clean:
-	rm -rf $(ODIR)
-	make -C $(SUB1D) fclean
+	@rm -rf $(ODIR)
+	@make -C $(SUB1D) fclean
 
 fclean: clean
 	rm -f $(NAME)

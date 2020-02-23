@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   live_instruction.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 16:42:53 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/02 19:16:42 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 17:20:44 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_live(t_cor *cor, t_pro *pro)
 		if (args[0].value == (int)cor->champ[i].id_champ)
 		{
 			if (cor->verbose & VERBOSE_LIVES)
-				printf("Player %i (%s) is said to be alive\n",
+				ft_printf("Player %i (%s) is said to be alive\n",
 				cor->nb_champs - i, cor->champ[i].header.prog_name);
 			cor->champ[i].nb_lives += 1;
 			cor->champ[i].last_cycle_live = cor->nb_cycles;

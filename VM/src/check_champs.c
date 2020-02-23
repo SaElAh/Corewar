@@ -36,7 +36,7 @@ int				check_champs(t_cor *cor, char *name)
 	}
 	if (check_duplicates(cor))
 	{
-		printf("Champions with duplicate ID\n");
+		ft_printf("Champions with duplicate ID\n");
 		return (1);
 	}
 	return (0);

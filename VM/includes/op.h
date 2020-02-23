@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/23 16:39:36 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/23 18:09:46 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,6 @@ struct				s_corewar
 # define VERBOSE_OP_LEGACY	4
 # define VERBOSE_DEATH		8
 # define VERBOSE_PC			16
-# define VERBOSE_OPERATIONS	32
 
 /*
 **	Options + champions parsing functions
@@ -267,8 +266,6 @@ void				write_map(t_cor *cor, int64_t addr, int value, int index_champ);
 /*
 ** Utils for debug
 */
-void				print_args(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
-						int nb_args, int carry);
 void				print_map(t_cor *cor);
 int					champ_nb(uint32_t owner);
 

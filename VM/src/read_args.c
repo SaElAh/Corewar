@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 22:59:18 by yforeau           #+#    #+#             */
-/*   Updated: 2020/01/27 03:56:39 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/23 18:08:59 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,19 +100,4 @@ int			read_args(t_args args[MAX_ARGS_NUMBER], t_cor *cor, t_pro *pro)
 			err |= (args[i].value < 1 || args[i].value > 16);
 	}
 	return (err);
-}
-
-// EST CE QU ON S EN SERT ?
-void		print_args(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
-				int nb_args, int carry)
-{
-	int	i;
-
-	if (!(cor->verbose & VERBOSE_OPERATIONS))
-		return ;
-	i = -1;
-	while (++i < nb_args)
-		printf("args[%d] = [ type = %s, size = %d, value = %d, carry = %d ]\n",
-			i, args[i].type == REG_CODE ? "REG" : args[i].type == DIR_CODE ?
-			"DIR" : "IND", args[i].size, args[i].value, carry);
 }

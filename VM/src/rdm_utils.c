@@ -30,11 +30,11 @@ void	print_map(t_cor *cor)
 		c = cor->map[i];
 		if (!(i % 64))
 		{
-			printf("0x%.4x : ", j);
+			ft_printf("0x%.4x : ", j);
 			j += 64;
 		}
-		printf("%.2hhx ", c);
+		ft_printf("%.2hhx ", c);
 		if ((i % 64) == 63)
-			printf("\n");
+			ft_printf("\n");
 	}
 }

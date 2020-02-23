@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 19:02:03 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/02 19:04:16 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 17:20:47 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	verbose_sti(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 	curr_addtmp = args[1].type == DIR_CODE ? utils[1] + (tmp1 + tmp2) % IDX_MOD
 										: (utils[1] + tmp1 + tmp2);
 	adjust_curr_add(&curr_addtmp);
-	printf("P%5i | %s r%i %i %i\n",
+	ft_printf("P%5i | %s r%i %i %i\n",
 		pro->index_pro, g_op_tab[utils[0]].ope,
 		args[0].value, tmp1, tmp2);
-	printf("       | -> %s to %i + %i = %i (with pc and mod %lli)\n",
+	ft_printf("       | -> %s to %i + %i = %i (with pc and mod %lli)\n",
 			g_op_tab[utils[0]].description, tmp1, tmp2,
 			tmp1 + tmp2, curr_addtmp);
 }
@@ -81,10 +81,10 @@ void	verbose_ldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 									: args[1].value;
 	curr_addtmp = (utils[1] + tmp1 + tmp2) % IDX_MOD;
 	adjust_curr_add(&curr_addtmp);
-	printf("P%5i | %s %i %i r%i\n",
+	ft_printf("P%5i | %s %i %i r%i\n",
 		pro->index_pro, g_op_tab[utils[0]].ope, tmp1, tmp2,
 		args[2].value);
-	printf("       | -> load from %i + %i = %i (with pc and mod %lli)\n",
+	ft_printf("       | -> load from %i + %i = %i (with pc and mod %lli)\n",
 			tmp1, tmp2, tmp1 + tmp2, curr_addtmp);
 }
 
@@ -103,7 +103,7 @@ void	verbose_lld(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 	lul[1] = lul[3];
 	lul[3] = 0;
 	lul[2] = 0;
-	printf("P%5i | %s %i r%i\n",
+	ft_printf("P%5i | %s %i r%i\n",
 		pro->index_pro, g_op_tab[utils[0]].ope,
 		args[0].type == IND_CODE ? tmp1
 		: args[0].value, args[1].value);
@@ -129,9 +129,9 @@ void	verbose_lldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 				? read_map(cor->map, (utils[1] + args[1].value))
 				: args[1].value;
 	curr_addtmp = (utils[1] + tmp1 + tmp2);
-	printf("P%5i | %s %i %i r%i\n",
+	ft_printf("P%5i | %s %i %i r%i\n",
 		pro->index_pro, g_op_tab[utils[0]].ope,
 		tmp1, tmp2, args[2].value);
-	printf("       | -> load from %i + %i = %i (with pc %lli)\n",
+	ft_printf("       | -> load from %i + %i = %i (with pc %lli)\n",
 			tmp1, tmp2, tmp1 + tmp2, curr_addtmp);
 }

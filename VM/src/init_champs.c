@@ -5,6 +5,7 @@
 #include <limits.h>
 
 #include "operations.h"
+#include "libft.h"
 #include "op.h"
 
 static void		sort_champs_by_id(t_cor *cor)
@@ -46,7 +47,7 @@ static int		create_processus(t_cor *cor)
 	ind = 0;
 	while (--i >= 0)
 	{
-		if (!(tmp = calloc(1, sizeof(t_pro))))
+		if (!(tmp = ft_memalloc(sizeof(t_pro))))
 		{
 			free_champs_process(cor);
 			return (1);
@@ -74,14 +75,14 @@ static void		place_champs(t_cor *cor)
 	ind = cor->nb_champs - 1;
 	i = 0;
 	j = MEM_SIZE / cor->nb_champs;
-	memset(&cor->owner[0], 4, MEM_SIZE);
+	ft_memset(&cor->owner[0], 4, MEM_SIZE);
 	while (i < cor->nb_champs)
 	{
 		cor->champ[ind].index_champ = i;
 		cor->champ[ind].curr_add = i * j;
-		memcpy(&cor->map[i * j], cor->champ[ind].prog,
+		ft_memcpy(&cor->map[i * j], cor->champ[ind].prog,
 				cor->champ[ind].header.prog_size);
-		memset(&cor->owner[i * j], ind, cor->champ[ind].header.prog_size);
+		ft_memset(&cor->owner[i * j], ind, cor->champ[ind].header.prog_size);
 		i++;
 		ind--;
 	}
@@ -114,7 +115,7 @@ int				init_corewar(t_cor *cor, int nb_args, char **av)
 	cor->curr_ind_process = -1;
 	if (parse_arguments(nb_args, av, cor))
 	{
-		printf("%s: parse_options error\n", *av);
+		ft_printf("%s: parse_options error\n", *av);
 		return (1);
 	}
 	if (check_champs(cor, av[0]))
