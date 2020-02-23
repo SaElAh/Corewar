@@ -6,11 +6,11 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 17:29:51 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/22 17:15:28 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:41:29 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "op.h"
 
 void	maj_map_owner(t_visu *visu)
 {

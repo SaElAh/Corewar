@@ -6,11 +6,11 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 17:05:23 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/22 17:19:16 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:41:23 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "op.h"
 
 void	init_colors(void)
 {

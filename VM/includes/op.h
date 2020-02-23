@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/01/28 18:03:06 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/23 16:39:36 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <libc.h>
 # include <time.h>
 # include <ncurses.h>
-# include "ncurses/get_next_line.h"
+# include "libft.h"
 
 # define MEMORY 4096
 # define LINE_LENGTH 192

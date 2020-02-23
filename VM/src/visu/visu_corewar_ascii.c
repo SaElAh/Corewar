@@ -6,11 +6,11 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 17:07:01 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/22 17:20:41 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 16:41:19 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../op.h"
+#include "op.h"
 
 int8_t	call_open(char *path)
 {
