@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/23 18:09:46 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:32:01 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ int					check_len_file(int file, char *av);
 int					check_dump(int *nb_args, char ***av, t_cor *cor);
 int					check_nb_opt(int *nb_args, char ***av,
 									uint64_t *id_champ);
+void				show_opt(t_cor *cor, int kase);
 
 /*
 **	VM Initialisation
@@ -262,6 +263,9 @@ void				refresh_process_posi(t_cor *cor, t_pro *pro,
 											int curr, int dest);
 void				get_curr_char(t_pro *pro, t_cor *cor);
 void				write_map(t_cor *cor, int64_t addr, int value, int index_champ);
+int					ft_check_lives(t_cor *cor);
+void				ft_check_winner(t_cor *cor);
+void				re_init_check_utils(t_cor *cor, int kase);
 
 /*
 ** Utils for debug

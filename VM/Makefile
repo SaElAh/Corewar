@@ -18,8 +18,11 @@ VISUDIR			=	visu
 SRCC			=	aff_instruction.c\
 					check_champs.c\
 					check_len_file.c\
+					check_winner.c\
 					exec_champs.c\
 					fork_instructions.c\
+					free_champs_process.c\
+					get_curr_char.c\
 					init_champs.c\
 					introduce_champs.c\
 					live_instruction.c\
@@ -33,6 +36,7 @@ SRCC			=	aff_instruction.c\
 					read_args.c\
 					read_file_utils.c\
 					read_write_map.c\
+					shop_opt.c\
 					store_instructions.c\
 					usage.c\
 					verbose_op_legacy.c\
@@ -61,16 +65,19 @@ vpath			%.c	$(SRCDIR)
 all: $(NAME)
 
 $(NAME): $(SUB1D)/libft.a $(ODIR) $(OBJ)
-	@$(CC) $(CFLAGS) -o $@ $(patsubst %.o,$(ODIR)/%.o,$(OBJ)) $(LIBS)
+	$(CC) $(CFLAGS) -o $@ $(patsubst %.o,$(ODIR)/%.o,$(OBJ)) $(LIBS)
 
 $(SUB1D)/libft.a:
-	@make -C $(SUB1D)
+	make -C $(SUB1D)
 
 aff_instruction.o: op.h libft.h
 check_champs.o: op.h libft.h
 check_len_file.o: op.h libft.h
+check_winner.o: op.h libft.h
 exec_champs.o: op.h libft.h operations.h
 fork_instructions.o: op.h libft.h
+free_champs_process.o: op.h libft.h
+get_curr_char.o: op.h libft.h
 init_champs.o: operations.h op.h libft.h
 introduce_champs.o: op.h libft.h
 live_instruction.o: op.h libft.h
@@ -84,7 +91,9 @@ rdm_utils.o: op.h libft.h
 read_args.o: op.h libft.h
 read_file_utils.o: op.h libft.h
 read_write_map.o: op.h libft.h
+shop_opt.o: op.h libft.h
 store_instructions.o: op.h libft.h
+usage.o: libft.h
 verbose_op_legacy.o: op.h libft.h
 verbose_op_legacy_2.o: op.h libft.h
 verbose_op_legacy_3.o: op.h libft.h
@@ -96,7 +105,7 @@ visu_corewar_utils.o: op.h libft.h
 zjmp_instruction.o: op.h libft.h
 %.o: %.c
 	@mkdir -p $(ODIR)
-	@$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
+	$(CC) -c $(CFLAGS) $< $(HFLAGS) -o $(ODIR)/$@
 
 $(ODIR):
 	mkdir -p $@
@@ -104,8 +113,8 @@ $(ODIR):
 ############################## CLEANUP #########################################
 
 clean:
-	@rm -rf $(ODIR)
-	@make -C $(SUB1D) fclean
+	rm -rf $(ODIR)
+	make -C $(SUB1D) fclean
 
 fclean: clean
 	rm -f $(NAME)

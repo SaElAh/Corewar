@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 16:39:11 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 17:21:57 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:33:00 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		ft_zjmp(t_cor *cor, t_pro *pro)
 	if (read_args(args, cor, pro))
 		return (1);
 	print_op(cor, args, pro, (int[2]){8, curr_add});
-	print_args(cor, args, g_op_tab[8].nb_args, pro->carry);
 	if (pro->carry)
 		pro->curr_add = curr_add + args[0].value;
 	adjust_curr_add(&pro->curr_add);

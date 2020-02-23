@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 16:42:53 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 17:20:44 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:29:35 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		ft_live(t_cor *cor, t_pro *pro)
 	if (read_args(args, cor, pro))
 		return (1);
 	print_op(cor, args, pro, (int[2]){0, 0});
-	print_args(cor, args, g_op_tab[0].nb_args, pro->carry);
 	pro->nb_lives += 1;
 	pro->last_cycle_live = cor->nb_cycles;
 	while (i < cor->nb_champs)

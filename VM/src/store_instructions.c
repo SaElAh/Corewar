@@ -12,7 +12,6 @@ int		ft_sti(t_cor *cor, t_pro *pro)
 	if (read_args(args, cor, pro))
 		return (1);
 	print_op(cor, args, pro, (int[2]){10, curr_add});
-	print_args(cor, args, g_op_tab[10].nb_args, pro->carry);
 	i = 0;
 	while (++i < 3)
 	{
@@ -37,8 +36,6 @@ int		ft_st(t_cor *cor, t_pro *pro)
 	curr_add = pro->curr_add;
 	if (read_args(args, cor, pro))
 		return (1);
-	print_op(cor, args, pro, (int[2]){2, curr_add});
-	print_args(cor, args, g_op_tab[2].nb_args, pro->carry);
 	if (args[1].type == REG_CODE)
 		pro->reg[args[1].value - 1] = pro->reg[args[0].value - 1];
 	else

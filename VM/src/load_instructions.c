@@ -15,7 +15,6 @@ int		ft_ld(t_cor *cor, t_pro *pro)
 	adjust_curr_add(&curr_addtmp);
 	tmp1 = read_map(cor->map, curr_addtmp);
 	print_op(cor, args, pro, (int[2]){1, curr_add});
-	print_args(cor, args, g_op_tab[1].nb_args, pro->carry);
 	pro->reg[args[1].value - 1] = args[0].type == DIR_CODE ? args[0].value
 		: tmp1;
 	pro->carry = !pro->reg[args[1].value - 1];
@@ -33,7 +32,6 @@ int		ft_ldi(t_cor *cor, t_pro *pro)
 	if (read_args(args, cor, pro))
 		return (1);
 	print_op(cor, args, pro, (int[2]){9, curr_add});
-	print_args(cor, args, g_op_tab[9].nb_args, pro->carry);
 	i = -1;
 	while (++i < 2)
 	{
@@ -59,7 +57,6 @@ int		ft_lld(t_cor *cor, t_pro *pro)
 	if (read_args(args, cor, pro))
 		return (1);
 	print_op(cor, args, pro, (int[2]){12, curr_add});
-	print_args(cor, args, g_op_tab[12].nb_args, pro->carry);
 	pro->reg[args[1].value - 1] = args[0].type == DIR_CODE ? args[0].value
 		: read_map(cor->map, curr_add + args[0].value);
 	if (args[0].type == IND_CODE)
@@ -85,7 +82,6 @@ int		ft_lldi(t_cor *cor, t_pro *pro)
 	if (read_args(args, cor, pro))
 		return (1);
 	print_op(cor, args, pro, (int[2]){13, curr_add});
-	print_args(cor, args, g_op_tab[13].nb_args, pro->carry);
 	i = -1;
 	while (++i < 2)
 	{
