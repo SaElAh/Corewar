@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 17:07:01 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 17:06:16 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/23 18:37:31 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ int		read_corewar(int fd, WINDOW *win, int8_t offset)
 	while (get_next_line(fd, &line) > 0)
 	{
 		mvwprintw(win, i++, offset, "%s\n", line);
-		free(line);
+		ft_memdel((void **)&line);
 	}
 	line = NULL;
 	get_next_line(fd, &line);
-	line ? mvwprintw(win, i++, offset, "%s\n", line) : 0;
-	free(line);
+	if (line)
+	{
+		mvwprintw(win, i++, offset, "%s\n", line);
+		ft_memdel((void **)&line);
+	}
 	return (EXIT_SUCCESS);
 }
 

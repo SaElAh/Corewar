@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 16:41:30 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 18:29:24 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/23 18:36:12 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int				ft_fork(t_cor *cor, t_pro *pro)
 	if (read_args(args, cor, pro))
 		return (1);
 	print_op(cor, args, pro, (int[2]){11, curr_add});
-	if (!(new = create_forked_process(cor, pro)))
-		exit(1);
+	new = create_forked_process(cor, pro);
 	new->curr_add = curr_add + (args[0].value % IDX_MOD);
 	adjust_curr_add(&new->curr_add);
 	return (0);
@@ -61,8 +60,7 @@ int				ft_lfork(t_cor *cor, t_pro *pro)
 	if (read_args(args, cor, pro))
 		return (1);
 	print_op(cor, args, pro, (int[2]){14, curr_add});
-	if (!(new = create_forked_process(cor, pro)))
-		exit(1);
+	new = create_forked_process(cor, pro);
 	new->curr_add = curr_add + args[0].value;
 	adjust_curr_add(&new->curr_add);
 	return (0);
