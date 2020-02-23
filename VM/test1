@@ -1,0 +1,209 @@
+#!/usr/bin/env bash
+
+#################################### usage #####################################
+
+function usage()
+{
+	echo "usage: $0 [-h] [-s N -v N] [-c champ.cor [-c other_champ.cor ...]]"
+}
+
+##################################### help #####################################
+
+function print_help()
+{
+	echo "-h: print this"
+	echo "-d: dump the map after N cycles and exits (0 min)"
+	echo "-s: scan the map every N cycle instead of 1 by default (1 min)"
+	echo "-v: verbosity of level N (2 min)"
+	echo "-c: add a champion to be executed by the VMs (4 max)"
+	exit 0
+}
+
+############################### parse arguments ################################
+
+CHAMPS=""
+dump=0
+n_dump=0
+verbosity=2
+scan_period=1
+args=`getopt hd:s:v:c: $*`
+
+if [ $? != 0 ]; then
+	usage
+	exit 1
+fi
+
+set -- $args
+for i; do
+	case "$i"
+	in
+		-h)
+			print_help; shift ;;
+		-d)
+			dump=1; n_dump="$2"; shift; shift;;
+		-s)
+			scan_period="$2"; shift; shift;;
+		-v)
+			verbosity="$2"; shift; shift;;
+		-c)
+			CHAMPS+="$2 "; shift; shift;;
+		--)
+			shift; break;;
+	esac
+done
+
+if [ "$CHAMPS" == "" ] || [ $scan_period -lt 1 ] \
+	|| [ $verbosity -lt 2 ] || [ $n_dump -lt 0 ]; then
+	usage
+	exit 1
+fi
+
+############################### initialize data ################################
+
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+NC="\033[0m"
+
+COREWAR_ORIG="../corewar"
+COREWAR_MINE="./a.out"
+FD_ORIG=7
+FD_MINE=8
+PIPEIN_ORIG="pipein_orig" PIPEIN_MINE="pipein_mine"
+PIPEOUT_ORIG="pipeout_orig"
+PIPEOUT_MINE="pipeout_mine"
+
+line_orig=""
+line_mine=""
+eof_orig=0
+eof_mine=0
+diff_res=0
+cycle=1
+i=0
+declare -a dump_orig
+declare -a dump_mine
+
+while [ $i -lt 64 ]; do
+	dump_orig+=("")
+	dump_mine+=("")
+	((i++))
+done
+
+################################## diff_dumps ##################################
+
+function diff_dumps()
+{
+	local i=0
+
+	while [ $i -lt 64 ]; do
+		if [ "${dump_orig[$i]}" != "${dump_mine[$i]}" ]; then
+			return 1
+		fi
+		((i++))
+	done
+	return 0
+}
+
+################################## print_diff ##################################
+
+function print_diff()
+{
+	local str1=""
+	local str2=""
+	local i=0
+	local j=0
+
+	while [ $i -lt 64 ]; do
+		if [ "${dump_orig[$i]}" != "${dump_mine[$i]}" ]; then
+			str1="${dump_orig[$i]}"
+			str2="${dump_mine[$i]}"
+			j=9
+			echo -n "orig: ${str1:0:9}"
+			while [ $j -lt ${#str1} ]; do
+				if [ "${str1:$j:2}" != "${str2:$j:2}" ]; then
+					echo -ne $GREEN"${str1:$j:3}"$NC
+				else
+					echo -n "${str1:$j:3}"
+				fi
+				((j+=3))
+			done
+			j=9
+			echo
+			echo -n "mine: ${str2:0:9}"
+			while [ $j -lt ${#str2} ]; do
+				if [ "${str2:$j:2}" != "${str1:$j:2}" ]; then
+					echo -ne $RED"${str2:$j:3}"$NC
+				else
+					echo -n "${str2:$j:3}"
+				fi
+				((j+=3))
+			done
+			echo
+		else
+			echo "      ${dump_orig[$i]}"
+		fi
+		((i++))
+	done
+}
+
+
+############################### initialize game ################################
+
+mkfifo $PIPEIN_ORIG
+mkfifo $PIPEIN_MINE
+mkfifo $PIPEOUT_ORIG
+mkfifo $PIPEOUT_MINE
+dump_opt=""
+if [ $dump -eq 1 ]; then
+		dump_opt="-d $n_dump"
+fi
+cmd_args="$dump_opt -v $verbosity -s $scan_period $CHAMPS"
+stdbuf -i0 -o0 -e0 $COREWAR_ORIG $cmd_args < $PIPEIN_ORIG > $PIPEOUT_ORIG &
+stdbuf -i0 -o0 -e0 $COREWAR_MINE $cmd_args < $PIPEIN_MINE > $PIPEOUT_MINE &
+echo > $PIPEIN_ORIG
+echo > $PIPEIN_MINE
+exec 7<$PIPEOUT_ORIG
+exec 8<$PIPEOUT_MINE
+
+################################## main loop ###################################
+
+i=0
+start_diff=0
+while [ 42 ]
+do
+	if ! read line_orig <&$FD_ORIG; then
+		eof_orig=1
+	fi
+	if ! read line_mine <&$FD_MINE; then
+		eof_mine=1
+	fi
+	if [[ $eof_orig -eq 1 || $eof_mine -eq 1 ]]; then # TODO: check if both end at the same time
+		break
+	fi
+	if [ $i -eq 64 ]; then
+		i=0
+		if [ "$cycle" -gt "$start_diff" ]; then
+			diff_dumps
+			diff_res=$?
+			echo -n "diff cycle $cycle: " 
+			if [ $diff_res -eq 0 ]; then
+				echo -e $GREEN"OK"$NC
+			else
+				echo -e $RED"KO"$NC
+				print_diff
+				break
+			fi
+		fi
+		cycle=$((cycle+scan_period))
+	elif [ "${line_orig:0:2}" == "0x" ] || [ "${line_mine:0:2}" == "0x" ]; then
+		dump_orig[$i]=$line_orig
+		dump_mine[$i]=$line_mine
+		((i++))
+	fi
+done
+
+################################### cleanup ####################################
+
+rm $PIPEIN_ORIG
+rm $PIPEIN_MINE
+rm $PIPEOUT_ORIG
+rm $PIPEOUT_MINE
