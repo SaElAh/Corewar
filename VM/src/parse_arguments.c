@@ -99,19 +99,21 @@ void	parse_option(int c, char *arg, t_cor *cor)
 int		parse_arguments(int argc, char **argv, t_cor *cor)
 {
 	int		c;
+	t_optdata	od;
 
-	while (optind < argc)
+	init_getopt(&od, OPT_STRING, NULL, NULL);
+	while (od.optind < argc)
 	{
-		if ((c = getopt(argc, argv, ":d:s:v:n:g")) != -1)
+		if ((c = ft_getopt(argc, argv, &od)) != -1)
 		{
 			if (c == ':')
-				ft_dprintf(2, "no argument given for '%c' option\n", optopt);
+				ft_dprintf(2, "no argument given for '%c' option\n", od.optopt);
 			else if (c == '?')
-				ft_dprintf(2, "unknown option: '%c'\n", optopt);
+				ft_dprintf(2, "unknown option: '%c'\n", od.optopt);
 			else
-				parse_option(c, optarg, cor);
+				parse_option(c, od.optarg, cor);
 		}
-		else if (add_champ(argv[optind++], cor))
+		else if (add_champ(argv[od.optind++], cor))
 			return (1);
 	}
 	return (0);

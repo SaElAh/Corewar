@@ -18,7 +18,6 @@
 /*
 ** For the visu
 */
-# include <libc.h>
 # include <time.h>
 # include <ncurses.h>
 # include "libft.h"
@@ -224,6 +223,8 @@ struct				s_corewar
 # define VERBOSE_OP_LEGACY	4
 # define VERBOSE_DEATH		8
 # define VERBOSE_PC			16
+
+# define OPT_STRING		":d:s:v:n:g"
 
 /*
 **	Options + champions parsing functions
