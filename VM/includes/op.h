@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/25 18:41:57 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/25 19:49:49 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,15 +227,39 @@ struct				s_corewar
 **	Options + champions parsing functions
 */
 int					read_binary(char *av, t_champ *champ);
-int					read_magic(int file, t_champ *champ);
-int					read_prog_name(int file, t_champ *champ);
-int					read_prog_size(int file, t_champ *champ);
-int					read_comment(int file, t_champ *champ);
-int					read_prog(int file, t_champ *champ);
+int					read_magic(int file, t_champ *champ, char *av);
+int					read_prog_name(int file, t_champ *champ, char *av);
+int					read_prog_size(int file, t_champ *champ, char *av);
+int					read_comment(int file, t_champ *champ, char *av);
+int					read_prog(int file, t_champ *champ, char *av);
 int					check_len_file(int file, char *av);
 int					check_dump(int *nb_args, char ***av, t_cor *cor);
 int					check_nb_opt(int *nb_args, char ***av,
 									uint64_t *id_champ);
+/*
+int		read_prog(int file, t_champ *champ)
+{
+	char		buffer[CHAMP_MAX_SIZE * 2];
+	uint32_t	len;
+
+	if ((len = read(file, buffer, CHAMP_MAX_SIZE * 2)) < 0)
+	{
+		ft_printf("ERROR IN READ read prog\n");
+		return (1);
+	}
+	if (len > CHAMP_MAX_SIZE || len != champ->header.prog_size)
+	{
+		if (len > CHAMP_MAX_SIZE)
+			ft_printf("Error: File has too large a code (%u > %u)\n",
+					len, CHAMP_MAX_SIZE);
+		else
+			ft_printf("Error: File has a code size that differs from what \
+its header says\n");
+		return (1);
+	}
+	ft_memcpy(&champ->prog, buffer, len);
+	return (0);
+}*/
 void				show_opt(t_cor *cor, int kase);
 
 /*
