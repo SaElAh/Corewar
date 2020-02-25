@@ -95,14 +95,16 @@ int		read_prog(int file, t_champ *champ)
 		ft_printf("ERROR IN READ read prog\n");
 		return (1);
 	}
-	if (len > CHAMP_MAX_SIZE || len != champ->header.prog_size)
+	if (len != champ->header.prog_size)
 	{
-		if (len > CHAMP_MAX_SIZE)
-			ft_printf("Error: File has too large a code (%u > %u)\n",
-					len, CHAMP_MAX_SIZE);
-		else
-			ft_printf("Error: File has a code size that differs from what\
+		ft_printf("Error: File has a code size that differs from what \
 its header says\n");
+		return (1);
+	}
+	else if (len > CHAMP_MAX_SIZE)
+	{
+		ft_printf("Error: File has too large a code (%u > %u)\n",
+				len, CHAMP_MAX_SIZE);
 		return (1);
 	}
 	ft_memcpy(&champ->prog, buffer, len);
