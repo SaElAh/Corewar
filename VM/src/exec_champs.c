@@ -91,10 +91,6 @@ void				ft_exec_champs(t_cor *cor, t_visu *visu)
 		if (cor->graphic)
 			call_map_check_process(visu);
 	}
-//	++cor->nb_cycles;
-//	--cor->cycles_to_die;
-//	ft_exec_process(cor);
-//	ft_check_lives(cor);
 	if (cor->dump_opt && cor->nb_cycles == cor->nb_cycles_dump)
 		print_map(cor);
 }

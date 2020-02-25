@@ -38,9 +38,10 @@ int		read_binary(char *av, t_champ *champ)
 		ft_printf("%s: %s\n", av, strerror(errno));
 		check_err = 1;
 	}
-	if (check_err || check_len_file(file, av) || read_magic(file, champ)
-			|| read_prog_name(file, champ) || read_prog_size(file, champ)
-			|| read_comment(file, champ) || read_prog(file, champ))
+	if (check_err || check_len_file(file, av) || read_magic(file, champ, av)
+			|| read_prog_name(file, champ, av)
+			|| read_prog_size(file, champ, av)
+			|| read_comment(file, champ, av) || read_prog(file, champ, av))
 		check_err = 1;
 	close(file);
 	return (check_err);
@@ -61,7 +62,7 @@ int		add_champ(char *champ_file, t_cor *cor)
 	cor->champ[i].index_champ = i;
 	if (read_binary(champ_file, &cor->champ[i]))
 	{
-		ft_dprintf(2, "error while reading champion file '%s'\n", champ_file);
+		//ft_dprintf(2, "error while reading champion file '%s'\n", champ_file);
 		return (1);
 	}
 	return (0);

@@ -110,10 +110,7 @@ int				init_corewar(t_cor *cor, int nb_args, char **av)
 	cor->nb_checks = 1;
 	cor->curr_ind_process = -1;
 	if (parse_arguments(nb_args, av, cor))
-	{
-		ft_printf("%s: parse_options error\n", *av);
 		return (1);
-	}
 	if (check_champs(cor, av[0]))
 		return (1);
 	init_dispatcher(cor);

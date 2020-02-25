@@ -5,7 +5,7 @@
 #include "libft.h"
 #include "op.h"
 
-int		read_magic(int file, t_champ *champ)
+int		read_magic(int file, t_champ *champ, char *av)
 {
 	uint32_t	magic;
 	char		buffer[4];
@@ -22,14 +22,14 @@ int		read_magic(int file, t_champ *champ)
 		|| ((magic >> 16) & 0xff) != (buffer[2] & 0xff)
 		|| ((magic >> 24) & 0xff) != (buffer[3] & 0xff))
 	{
-		ft_printf("PB WITH THE MAGIC NUMBER\n");
+		ft_dprintf(2, "Error: File %s has an invalid header\n", av);
 		return (1);
 	}
 	champ->header.magic = COREWAR_EXEC_MAGIC;
 	return (0);
 }
 
-int		read_prog_name(int file, t_champ *champ)
+int		read_prog_name(int file, t_champ *champ, char *av)
 {
 	char	buffer[PROG_NAME_LENGTH];
 
@@ -40,14 +40,14 @@ int		read_prog_name(int file, t_champ *champ)
 	}
 	if (lseek(file, 4, SEEK_CUR) != sizeof(uint32_t) + PROG_NAME_LENGTH + 4)
 	{
-		ft_printf("PB WITH THE PROG NAME\n");
+		ft_dprintf(2, "Error: File %s has an invalid header\n", av);
 		return (1);
 	}
 	ft_memcpy(&champ->header.prog_name, buffer, PROG_NAME_LENGTH);
 	return (0);
 }
 
-int		read_prog_size(int file, t_champ *champ)
+int		read_prog_size(int file, t_champ *champ, char *av)
 {
 	char	buffer[4];
 
@@ -58,7 +58,7 @@ int		read_prog_size(int file, t_champ *champ)
 	}
 	if (lseek(file, 0, SEEK_CUR) != sizeof(uint32_t) * 2 + PROG_NAME_LENGTH + 4)
 	{
-		ft_printf("ERROR IN PROG SIZE\n");
+		ft_dprintf(2, "Error: File %s has an invalid header\n", av);
 		return (1);
 	}
 	champ->header.prog_size = ((0xff & buffer[0]) << 24)
@@ -67,7 +67,7 @@ int		read_prog_size(int file, t_champ *champ)
 	return (0);
 }
 
-int		read_comment(int file, t_champ *champ)
+int		read_comment(int file, t_champ *champ, char *av)
 {
 	char	buffer[COMMENT_LENGTH];
 
@@ -78,14 +78,14 @@ int		read_comment(int file, t_champ *champ)
 	}
 	if (lseek(file, 4, SEEK_CUR) != sizeof(t_header))
 	{
-		ft_printf("ERROR IN COMMENT\n");
+		ft_dprintf(2, "Error: File %s has an invalid header\n", av);
 		return (1);
 	}
 	ft_memcpy(&champ->header.comment, buffer, COMMENT_LENGTH);
 	return (0);
 }
 
-int		read_prog(int file, t_champ *champ)
+int		read_prog(int file, t_champ *champ, char *av)
 {
 	char		buffer[CHAMP_MAX_SIZE * 2];
 	uint32_t	len;
@@ -97,14 +97,14 @@ int		read_prog(int file, t_champ *champ)
 	}
 	if (len != champ->header.prog_size)
 	{
-		ft_printf("Error: File has a code size that differs from what \
-its header says\n");
+		ft_dprintf(2, "Error: File %s has a code size that differs from what \
+its header says\n", av);
 		return (1);
 	}
 	else if (len > CHAMP_MAX_SIZE)
 	{
-		ft_printf("Error: File has too large a code (%u > %u)\n",
-				len, CHAMP_MAX_SIZE);
+		ft_dprintf(2, "Error: File %s has too large a code (%u > %u)\n",
+				av, len, CHAMP_MAX_SIZE);
 		return (1);
 	}
 	ft_memcpy(&champ->prog, buffer, len);
