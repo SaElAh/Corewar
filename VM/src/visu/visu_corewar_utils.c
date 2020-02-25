@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 17:29:51 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 16:41:29 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/25 16:13:57 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	call_map_check_process(t_visu *visu)
 	i = 0;
 	maj_map_owner(visu);
 	nprint_map(visu, MEMORY);
-	mvwprintw(visu->dash, 50, 1, "nb_cycles = %d ", visu->cor->nb_cycles);
+	print_dashboard(visu);
 	while (i < SIZE_TAB_PRO)
 	{
 		pro = visu->cor->tab_process[i++];

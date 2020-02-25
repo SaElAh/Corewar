@@ -1,4 +1,3 @@
-
 #include "libft.h"
 
 void	usage(char *name)

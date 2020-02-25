@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/23 18:32:01 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/25 16:37:42 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ typedef struct		s_champion
 
 extern	t_op		g_op_tab[17];
 
+typedef struct s_corewar	t_cor;
+
 typedef	int			(*t_fnc[16])	(t_cor *cor, t_pro *pro);
 
 typedef void		(*t_pf_verbose[15])(t_cor*, t_args[MAX_ARGS_NUMBER],
@@ -172,7 +174,6 @@ typedef struct		s_owner
 }					t_owner;
 
 typedef struct timespec		t_time;
-typedef struct s_corewar	t_cor;
 
 typedef struct		s_visu
 {
@@ -293,15 +294,16 @@ void				verbose_st(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
 /*
 ** FONCTIONS NCURSES_COREWAR
 */
-void				get_info(t_visu *visu, t_cor *cor);
-void				getinit_colors();
-int					getft_visu(t_cor *cor, t_visu *visu);
-int8_t				getcall_open(char *path);
-void				getwindows_mgmt(t_visu *visu, int8_t fd_1, int8_t fd_2);
-int					getread_corewar(int fd, WINDOW *win, int8_t offset);
-void				getnprint_map(t_visu *visu, size_t len);
-void				getprint_champ_area(t_visu *visu, int64_t curr_add);
-void				getcall_map_check_process	(t_visu *visu);
+void	get_info(t_visu *visu, t_cor *cor);
+void	print_dashboard(t_visu *visu);
+void	init_colors();
+int		ft_visu(t_cor *cor, t_visu *visu);
+int8_t	call_open(char *path);
+void	windows_mgmt(t_visu *visu, int8_t fd_1, int8_t fd_2);
+int		read_corewar(int fd, WINDOW *win, int8_t offset);
+void	nprint_map(t_visu *visu, size_t len);
+void	print_champ_area(t_visu *visu, int64_t curr_add);
+void	call_map_check_process	(t_visu *visu);
 
 #endif
 

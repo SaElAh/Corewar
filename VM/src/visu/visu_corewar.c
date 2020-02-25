@@ -6,12 +6,33 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 16:52:07 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 18:53:43 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/25 17:02:32 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 #include "libft.h"
+
+void	print_dashboard(t_visu *visu)
+{
+	int32_t i;
+
+	i = -1;
+	visu->time1.tv_sec = 0;
+	visu->time1.tv_nsec = 10000000L;
+	mvwprintw(visu->dash, 29, 7, "Nb Cycles : %4d", visu->cor->nb_cycles);
+	while (++i < (int)visu->cor->nb_champs)
+		mvwprintw(visu->dash, 30 + i, 7, "Champ %d last cycle to live : %d",
+			i + 1, visu->cor->champ[i].last_cycle_live);
+	nanosleep(&visu->time1, &visu->time2);
+	mvwprintw(visu->dash, 34, 7, "Cycle to die : %4d", visu->cor->cycles_to_die);
+	mvwprintw(visu->dash, 35, 7, "Cycle to die ref : %4d", visu->cor->cycles_to_die_ref);
+}
+
+// void	print_winner(t_visu *visu)
+// {
+
+// }
 
 static void	kill_window(void)
 {
@@ -26,9 +47,16 @@ int		ft_visu(t_cor *cor, t_visu *visu)
 	if (!(fd_1 = call_open("./visu_utils/corewar")))
 		return (1);
 	if (!(fd_2 = call_open("./visu_utils/mmask")))
+	{
+		close(fd_1);
 		return (1);
+	}
 	if (!initscr())
+	{
+		close(fd_1);
+		close(fd_2);
 		ft_exit("initscr: failed to init window", EXIT_FAILURE);
+	}
 	ft_atexit(kill_window);
 	curs_set(0);
 	init_colors();
