@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 17:05:23 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 18:48:13 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/25 21:48:19 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ static void		init_visu(t_visu *visu)
 
 void			get_info(t_visu *visu, t_cor *cor)
 {
-	WINDOW	*vm;
-	WINDOW	*dash;
-
+	WINDOW * vm;
+	WINDOW * dash;
 	if (!(vm = subwin(stdscr, LINES, 272, 0, 0)))
 		ft_exit("subwin: failed to create vm sub window", EXIT_FAILURE);
 	ft_heap_collector((void *)vm, FT_COLLEC_ADD);

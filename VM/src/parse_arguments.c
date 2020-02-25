@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_arguments.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/25 21:46:09 by yforeau           #+#    #+#             */
+/*   Updated: 2020/02/25 21:47:46 by yforeau          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <limits.h>
 #include <fcntl.h>
@@ -61,10 +72,7 @@ int		add_champ(char *champ_file, t_cor *cor)
 		UINT_MAX - i : cor->champ[i].id_champ;
 	cor->champ[i].index_champ = i;
 	if (read_binary(champ_file, &cor->champ[i]))
-	{
-		//ft_dprintf(2, "error while reading champion file '%s'\n", champ_file);
 		return (1);
-	}
 	return (0);
 }
 
