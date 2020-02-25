@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/25 19:49:49 by sel-ahma         ###   ########.fr       */
+/*   Updated: 2020/02/25 22:15:15 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # define MEMORY 4096
 # define LINE_LENGTH 192
 # define LINES_NB 64
-# define OFFSET_COLS (((COLS / 4) * 3) - 192) / 2
-# define OFFSET_LINES (LINES - 64 + 15) / 2
+//# define OFFSET_COLS (((COLS / 4) * 3) - 192) / 2
+//# define OFFSET_LINES (LINES - 64 + 15) / 2
+# define OFFSET_COLS 40
+# define OFFSET_LINES 17
 # define WRITING_LEN 4
 
 /*
@@ -236,30 +238,6 @@ int					check_len_file(int file, char *av);
 int					check_dump(int *nb_args, char ***av, t_cor *cor);
 int					check_nb_opt(int *nb_args, char ***av,
 									uint64_t *id_champ);
-/*
-int		read_prog(int file, t_champ *champ)
-{
-	char		buffer[CHAMP_MAX_SIZE * 2];
-	uint32_t	len;
-
-	if ((len = read(file, buffer, CHAMP_MAX_SIZE * 2)) < 0)
-	{
-		ft_printf("ERROR IN READ read prog\n");
-		return (1);
-	}
-	if (len > CHAMP_MAX_SIZE || len != champ->header.prog_size)
-	{
-		if (len > CHAMP_MAX_SIZE)
-			ft_printf("Error: File has too large a code (%u > %u)\n",
-					len, CHAMP_MAX_SIZE);
-		else
-			ft_printf("Error: File has a code size that differs from what \
-its header says\n");
-		return (1);
-	}
-	ft_memcpy(&champ->prog, buffer, len);
-	return (0);
-}*/
 void				show_opt(t_cor *cor, int kase);
 
 /*
@@ -284,7 +262,8 @@ void				re_init_lives_champs(t_cor *cor);
 void				refresh_process_posi(t_cor *cor, t_pro *pro,
 											int curr, int dest);
 void				get_curr_char(t_pro *pro, t_cor *cor);
-void				write_map(t_cor *cor, int64_t addr, int value, int index_champ);
+void				write_map(t_cor *cor, int64_t addr, int value,
+						int index_champ);
 int					ft_check_lives(t_cor *cor);
 void				ft_check_winner(t_cor *cor, t_visu *visu);
 void				re_init_check_utils(t_cor *cor, int kase);
@@ -318,29 +297,16 @@ void				verbose_st(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
 /*
 ** FONCTIONS NCURSES_COREWAR
 */
-void	get_info(t_visu *visu, t_cor *cor);
-void	print_dashboard(t_visu *visu);
-void	init_colors();
-int		ft_visu(t_cor *cor, t_visu *visu);
-int8_t	call_open(char *path);
-void	windows_mgmt(t_visu *visu, int8_t fd_1, int8_t fd_2);
-int		read_corewar(int fd, WINDOW *win, int8_t offset);
-void	nprint_map(t_visu *visu, size_t len);
-void	print_champ_area(t_visu *visu, int64_t curr_add);
-void	call_map_check_process	(t_visu *visu);
-void	print_winner(t_visu *visu, int ind_winner);
+void				get_info(t_visu *visu, t_cor *cor);
+void				print_dashboard(t_visu *visu);
+void				init_colors();
+int					ft_visu(t_cor *cor, t_visu *visu);
+int8_t				call_open(char *path);
+void				windows_mgmt(t_visu *visu, int8_t fd_1, int8_t fd_2);
+int					read_corewar(int fd, WINDOW *win, int8_t offset);
+void				nprint_map(t_visu *visu, size_t len);
+void				print_champ_area(t_visu *visu, int64_t curr_add);
+void				call_map_check_process(t_visu *visu);
+void				print_winner(t_visu *visu, int ind_winner);
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-
