@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 20:59:54 by yforeau           #+#    #+#             */
-/*   Updated: 2020/02/15 13:41:22 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/25 16:06:22 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static long int	ft_strtol(const char *nptr)
 	cutoff /= 10;
 	while (*nptr > 47 && *nptr < 58
 		&& (acc < cutoff || (acc == cutoff && *nptr <= cutlim)))
-			acc = (acc * 10) + (*nptr++ - 48);
-	if (*nptr > 47 && *nptr < 58) 
+		acc = (acc * 10) + (*nptr++ - 48);
+	if (*nptr > 47 && *nptr < 58)
 		acc = neg ? LONG_MIN : LONG_MAX;
 	else if (neg)
 		acc = -acc;

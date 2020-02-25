@@ -6,7 +6,7 @@
 /*   By: yforeau <yforeau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 20:15:02 by yforeau           #+#    #+#             */
-/*   Updated: 2020/02/03 17:07:43 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/25 16:06:46 by yforeau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ void			fuse_multiline_strings(t_list **tokens, size_t file_len)
 	}
 }
 
-//TODO: test if this function works if a second multilinestring is on the line
-//TODO: it should
 t_list			*handle_multiline_string(const char *line, int i,
 					int *multiline_string)
 {
