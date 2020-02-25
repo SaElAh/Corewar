@@ -97,5 +97,4 @@ void				ft_exec_champs(t_cor *cor, t_visu *visu)
 //	ft_check_lives(cor);
 	if (cor->dump_opt && cor->nb_cycles == cor->nb_cycles_dump)
 		print_map(cor);
-	ft_check_winner(cor);
 }

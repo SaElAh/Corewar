@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/02/25 16:37:42 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/25 18:41:57 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,7 @@ void				refresh_process_posi(t_cor *cor, t_pro *pro,
 void				get_curr_char(t_pro *pro, t_cor *cor);
 void				write_map(t_cor *cor, int64_t addr, int value, int index_champ);
 int					ft_check_lives(t_cor *cor);
-void				ft_check_winner(t_cor *cor);
+void				ft_check_winner(t_cor *cor, t_visu *visu);
 void				re_init_check_utils(t_cor *cor, int kase);
 
 /*
@@ -304,6 +304,7 @@ int		read_corewar(int fd, WINDOW *win, int8_t offset);
 void	nprint_map(t_visu *visu, size_t len);
 void	print_champ_area(t_visu *visu, int64_t curr_add);
 void	call_map_check_process	(t_visu *visu);
+void	print_winner(t_visu *visu, int ind_winner);
 
 #endif
 

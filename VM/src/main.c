@@ -15,8 +15,16 @@ int		main(int ac, char **av)
 	}
 	introduce_champs(&corewar);
 	if (corewar.graphic)
-		ft_visu(&corewar, &visu);
+	{
+		if (ft_visu(&corewar, &visu))
+		{
+			free_champs_process(&corewar);
+			ft_atexit(NULL);
+			return (1);
+		}
+	}
 	ft_exec_champs(&corewar, &visu);
+	ft_check_winner(&corewar, &visu);
 	ft_atexit(NULL);
 	return (0);
 }

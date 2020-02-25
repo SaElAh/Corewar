@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 16:52:07 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/25 17:02:32 by cghanime         ###   ########.fr       */
+/*   Updated: 2020/02/25 19:21:30 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,27 @@ void	print_dashboard(t_visu *visu)
 	i = -1;
 	visu->time1.tv_sec = 0;
 	visu->time1.tv_nsec = 10000000L;
+	wattron(visu->dash, COLOR_PAIR(5));
 	mvwprintw(visu->dash, 29, 7, "Nb Cycles : %4d", visu->cor->nb_cycles);
 	while (++i < (int)visu->cor->nb_champs)
 		mvwprintw(visu->dash, 30 + i, 7, "Champ %d last cycle to live : %d",
 			i + 1, visu->cor->champ[i].last_cycle_live);
 	nanosleep(&visu->time1, &visu->time2);
 	mvwprintw(visu->dash, 34, 7, "Cycle to die : %4d", visu->cor->cycles_to_die);
-	mvwprintw(visu->dash, 35, 7, "Cycle to die ref : %4d", visu->cor->cycles_to_die_ref);
+	mvwprintw(visu->dash, 35, 7, "Cycle to die ref : %4d",
+		visu->cor->cycles_to_die_ref);
 }
 
-// void	print_winner(t_visu *visu)
-// {
+ void	print_winner(t_visu *visu, int ind_winner)
+ {
+	 char c;
 
-// }
+	 wattron(visu->dash, COLOR_PAIR(6));
+	 mvwprintw(visu->dash, 50, 7, "And the winner is ... Champion %s", visu->cor->champ[ind_winner].header.prog_name);
+	 wrefresh(visu->dash);
+	 while (read(0, &c, 1) != -1 &&  c != ' ')
+	 	;
+ }
 
 static void	kill_window(void)
 {
@@ -44,9 +52,9 @@ int		ft_visu(t_cor *cor, t_visu *visu)
 	int8_t		fd_1;
 	int8_t		fd_2;
 
-	if (!(fd_1 = call_open("./visu_utils/corewar")))
+	if (!(fd_1 = call_open("./src/visu/visu_utils/corewar")))
 		return (1);
-	if (!(fd_2 = call_open("./visu_utils/mmask")))
+	if (!(fd_2 = call_open("./src/visu/visu_utils/mmask")))
 	{
 		close(fd_1);
 		return (1);

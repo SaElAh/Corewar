@@ -2,7 +2,7 @@
 #include "op.h"
 #include "libft.h"
 
-void	ft_check_winner(t_cor *cor)
+void	ft_check_winner(t_cor *cor, t_visu *visu)
 {
 	uint32_t	i;
 	uint32_t	winner;
@@ -23,6 +23,7 @@ void	ft_check_winner(t_cor *cor)
 		}
 		i++;
 	}
+	print_winner(visu, ind_winner);
 	ft_printf("Contestant %d, \"%s\", has won !\n",
 		cor->nb_champs - ind_winner,
 		cor->champ[ind_winner].header.prog_name);

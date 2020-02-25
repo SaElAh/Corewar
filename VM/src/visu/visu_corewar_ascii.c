@@ -6,7 +6,7 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/22 17:07:01 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 18:37:31 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/25 19:02:00 by cghanime         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int8_t	call_open(char *path)
 	if ((fd = open(path,
 		O_RDONLY, O_NOFOLLOW | O_NONBLOCK)) == -1)
 	{
+		ft_printf("path == %s", path);
 		write(2, "Error while opening file\n", 25);
 		return (0);
 	}
