@@ -1,9 +1,5 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <limits.h>
-
 #include "operations.h"
 #include "libft.h"
 #include "op.h"

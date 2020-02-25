@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "op.h"
-#include <stdio.h>
 
 void	verbose_add_sub(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 						int utils[2])

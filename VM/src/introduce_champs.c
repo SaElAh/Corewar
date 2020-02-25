@@ -1,6 +1,6 @@
 
 #include <limits.h>
-#include <stdio.h>
+#include "libft.h"
 #include "op.h"
 
 void	introduce_champs(t_cor *cor)

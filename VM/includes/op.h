@@ -14,13 +14,12 @@
 # define OP_H
 
 # include <stdint.h>
+# include <time.h>
+# include <ncurses.h>
 
 /*
 ** For the visu
 */
-# include <time.h>
-# include <ncurses.h>
-# include "libft.h"
 
 # define MEMORY 4096
 # define LINE_LENGTH 192
@@ -39,7 +38,6 @@
 # define EMPTY 5
 # define ASCII 6
 # define WHITE 7
-
 
 /*
 ** Toutes les tailles sont en octets.
@@ -160,8 +158,6 @@ typedef struct		s_champion
 	uint32_t		last_cycle_live;
 }					t_champ;
 
-typedef struct s_corewar	t_cor;
-
 extern	t_op		g_op_tab[17];
 
 typedef	int			(*t_fnc[16])	(t_cor *cor, t_pro *pro);
@@ -281,13 +277,7 @@ void				introduce_champs(t_cor *cor);
 void				verbose_pc(t_pro *tmp, t_cor *cor, int64_t tmp_add);
 void				print_op(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
 								t_pro *pro, int utils[2]);
-void				verbose_sti(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
-								t_pro *pro, int utils[2]);
-void				verbose_ldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
-								t_pro *pro, int utils[2]);
-void				verbose_lld(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
-								t_pro *pro, int utils[2]);
-void				verbose_lldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
+void				verbose_ld(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
 								t_pro *pro, int utils[2]);
 void				verbose_add_sub(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
 								t_pro *pro, int utils[2]);
@@ -297,23 +287,21 @@ void				verbose_forks(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
 								t_pro *pro, int utils[2]);
 void				verbose_live_zjmp(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
 								t_pro *pro, int utils[2]);
-void				verbose_ld(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
-								t_pro *pro, int utils[2]);
 void				verbose_st(t_cor *cor, t_args args[MAX_ARGS_NUMBER],
 								t_pro *pro, int utils[2]);
 
 /*
 ** FONCTIONS NCURSES_COREWAR
 */
-void	get_info(t_visu *visu, t_cor *cor);
-void	init_colors();
-int		ft_visu(t_cor *cor, t_visu *visu);
-int8_t	call_open(char *path);
-void	windows_mgmt(t_visu *visu, int8_t fd_1, int8_t fd_2);
-int		read_corewar(int fd, WINDOW *win, int8_t offset);
-void	nprint_map(t_visu *visu, size_t len);
-void	print_champ_area(t_visu *visu, int64_t curr_add);
-void	call_map_check_process	(t_visu *visu);
+void				get_info(t_visu *visu, t_cor *cor);
+void				getinit_colors();
+int					getft_visu(t_cor *cor, t_visu *visu);
+int8_t				getcall_open(char *path);
+void				getwindows_mgmt(t_visu *visu, int8_t fd_1, int8_t fd_2);
+int					getread_corewar(int fd, WINDOW *win, int8_t offset);
+void				getnprint_map(t_visu *visu, size_t len);
+void				getprint_champ_area(t_visu *visu, int64_t curr_add);
+void				getcall_map_check_process	(t_visu *visu);
 
 #endif
 

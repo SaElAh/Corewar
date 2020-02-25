@@ -11,11 +11,7 @@
 /* ************************************************************************** */
 
 #include "op.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <limits.h>
-#include <string.h>
+#include "libft.h"
 
 int		ft_live(t_cor *cor, t_pro *pro)
 {

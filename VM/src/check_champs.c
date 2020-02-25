@@ -1,6 +1,6 @@
 
-#include <stdio.h>
 #include "op.h"
+#include "libft.h"
 
 static int		check_duplicates(t_cor *cor)
 {

@@ -6,16 +6,11 @@
 /*   By: cghanime <cghanime@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/02 16:41:51 by cghanime          #+#    #+#             */
-/*   Updated: 2020/02/23 18:25:59 by yforeau          ###   ########.fr       */
+/*   Updated: 2020/02/25 15:26:05 by sel-ahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <limits.h>
-#include <string.h>
 
 int		ft_aff(t_cor *cor, t_pro *pro)
 {

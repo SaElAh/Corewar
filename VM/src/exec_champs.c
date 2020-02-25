@@ -1,11 +1,9 @@
 
-#include <stdio.h>
-#include <stdlib.h>
-
+#include "libft.h"
 #include "op.h"
 #include "operations.h"
 
-void			re_init_check_utils(t_cor *cor, int kase)
+void				re_init_check_utils(t_cor *cor, int kase)
 {
 	if (!kase)
 	{
@@ -32,7 +30,7 @@ extern inline void	adjust_curr_add(int64_t *address)
 		*address = *address % MEM_SIZE + MEM_SIZE;
 }
 
-void	call_instruction(t_cor *cor, t_pro *pro, int64_t prev_add)
+static void			call_instruction(t_cor *cor, t_pro *pro, int64_t prev_add)
 {
 	int64_t	tmp_add;
 
@@ -47,7 +45,7 @@ void	call_instruction(t_cor *cor, t_pro *pro, int64_t prev_add)
 	verbose_pc(pro, cor, prev_add);
 }
 
-void	ft_exec_process(t_cor *cor)
+static void			ft_exec_process(t_cor *cor)
 {
 	t_pro			*tmp;
 	int64_t			prev_add;
@@ -71,7 +69,7 @@ void	ft_exec_process(t_cor *cor)
 	cor->tab_process[cor->curr_ind_process] = NULL;
 }
 
-void	ft_exec_champs(t_cor *cor, t_visu *visu)
+void				ft_exec_champs(t_cor *cor, t_visu *visu)
 {
 	re_init_check_utils(cor, 0);
 	show_opt(cor, 0);
@@ -97,7 +95,6 @@ void	ft_exec_champs(t_cor *cor, t_visu *visu)
 //	--cor->cycles_to_die;
 //	ft_exec_process(cor);
 //	ft_check_lives(cor);
-
 	if (cor->dump_opt && cor->nb_cycles == cor->nb_cycles_dump)
 		print_map(cor);
 	ft_check_winner(cor);

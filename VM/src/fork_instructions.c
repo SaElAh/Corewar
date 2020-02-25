@@ -10,12 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "op.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <limits.h>
-#include <string.h>
 
 static t_pro	*create_forked_process(t_cor *cor, t_pro *forking_pro)
 {

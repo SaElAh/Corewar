@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "op.h"
-#include <stdio.h>
 
 static int	read_ocp(int op, t_args args[MAX_ARGS_NUMBER],
 				t_cor *cor, t_pro *pro)
@@ -64,7 +63,7 @@ static int	get_args_types(int op, t_args args[MAX_ARGS_NUMBER],
 	return (err);
 }
 
-void		get_value(uint8_t map[MEM_SIZE], int64_t *curr_add,
+static void	get_value(uint8_t map[MEM_SIZE], int64_t *curr_add,
 						t_args *args)
 {
 	int		j;

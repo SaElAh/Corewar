@@ -11,36 +11,9 @@
 /* ************************************************************************** */
 
 #include "op.h"
-#include <stdio.h>
+#include "libft.h"
 
-t_pf_verbose	g_pf_verbose =
-{
-	&verbose_live_zjmp,
-	&verbose_ld,
-	&verbose_st,
-	&verbose_add_sub,
-	&verbose_add_sub,
-	&verbose_and_or_xor,
-	&verbose_and_or_xor,
-	&verbose_and_or_xor,
-	&verbose_live_zjmp,
-	&verbose_ldi,
-	&verbose_sti,
-	&verbose_forks,
-	&verbose_lld,
-	&verbose_lldi,
-	&verbose_forks,
-};
-
-void	print_op(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
-					int utils[2])
-{
-	if (!(cor->verbose & VERBOSE_OP_LEGACY))
-		return ;
-	g_pf_verbose[utils[0]](cor, args, pro, utils);
-}
-
-void	verbose_sti(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
+static void	verbose_sti(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 					int utils[2])
 {
 	int		tmp1;
@@ -65,7 +38,7 @@ void	verbose_sti(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 			tmp1 + tmp2, curr_addtmp);
 }
 
-void	verbose_ldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
+static void	verbose_ldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 					int utils[2])
 {
 	int		tmp1;
@@ -88,7 +61,7 @@ void	verbose_ldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 			tmp1, tmp2, tmp1 + tmp2, curr_addtmp);
 }
 
-void	verbose_lld(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
+static void	verbose_lld(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 					int utils[2])
 {
 	int64_t		curr_addtmp;
@@ -109,7 +82,7 @@ void	verbose_lld(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 		: args[0].value, args[1].value);
 }
 
-void	verbose_lldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
+static void	verbose_lldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 						int utils[2])
 {
 	int		tmp1;
@@ -134,4 +107,31 @@ void	verbose_lldi(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
 		tmp1, tmp2, args[2].value);
 	ft_printf("       | -> load from %i + %i = %i (with pc %lli)\n",
 			tmp1, tmp2, tmp1 + tmp2, curr_addtmp);
+}
+
+t_pf_verbose	g_pf_verbose =
+{
+	&verbose_live_zjmp,
+	&verbose_ld,
+	&verbose_st,
+	&verbose_add_sub,
+	&verbose_add_sub,
+	&verbose_and_or_xor,
+	&verbose_and_or_xor,
+	&verbose_and_or_xor,
+	&verbose_live_zjmp,
+	&verbose_ldi,
+	&verbose_sti,
+	&verbose_forks,
+	&verbose_lld,
+	&verbose_lldi,
+	&verbose_forks,
+};
+
+void		print_op(t_cor *cor, t_args args[MAX_ARGS_NUMBER], t_pro *pro,
+					int utils[2])
+{
+	if (!(cor->verbose & VERBOSE_OP_LEGACY))
+		return ;
+	g_pf_verbose[utils[0]](cor, args, pro, utils);
 }

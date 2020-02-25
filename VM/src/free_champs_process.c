@@ -1,5 +1,5 @@
 
-#include <stdlib.h>
+#include "libft.h"
 #include "op.h"
 
 void			free_champs_process(t_cor *cor)

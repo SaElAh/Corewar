@@ -1,6 +1,6 @@
 
 #include "op.h"
-#include <stdio.h>
+#include "libft.h"
 
 void			verbose_pc(t_pro *tmp, t_cor *cor, int64_t tmp_add)
 {

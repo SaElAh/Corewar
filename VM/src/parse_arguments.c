@@ -1,13 +1,9 @@
 
-#include <stdlib.h>
-#include <string.h>
 #include <limits.h>
-#include <stdio.h>
-#include <unistd.h>
 #include <fcntl.h>
 #include <sys/errno.h>
-
 #include "op.h"
+#include "libft.h"
 
 int64_t	ft_atol(const char *str)
 {
@@ -98,7 +94,7 @@ void	parse_option(int c, char *arg, t_cor *cor)
 
 int		parse_arguments(int argc, char **argv, t_cor *cor)
 {
-	int		c;
+	int			c;
 	t_optdata	od;
 
 	init_getopt(&od, OPT_STRING, NULL, NULL);

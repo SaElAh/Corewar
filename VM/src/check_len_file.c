@@ -1,6 +1,5 @@
 
-#include <unistd.h>
-#include <stdio.h>
+#include "libft.h"
 #include "op.h"
 
 int		check_len_file(int file, char *av)

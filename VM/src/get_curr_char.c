@@ -1,7 +1,7 @@
 
 #include "op.h"
 
-t_pro	*init_get_curr_char(t_pro *pro, t_cor *cor, int64_t	*dest)
+static t_pro	*init_get_curr_char(t_pro *pro, t_cor *cor, int64_t *dest)
 {
 	pro->curr_char = cor->map[pro->curr_add];
 	if (pro->curr_char > 0 && pro->curr_char < 17)
@@ -12,7 +12,7 @@ t_pro	*init_get_curr_char(t_pro *pro, t_cor *cor, int64_t	*dest)
 	return (cor->tab_process[*dest]);
 }
 
-void	insert_pro(t_pro *tmp2, t_pro *pro)
+static void		insert_pro(t_pro *tmp2, t_pro *pro)
 {
 	t_pro	*tmp1;
 
@@ -28,7 +28,7 @@ void	insert_pro(t_pro *tmp2, t_pro *pro)
 	pro->prev = tmp2;
 }
 
-void	get_curr_char(t_pro *pro, t_cor *cor)
+void			get_curr_char(t_pro *pro, t_cor *cor)
 {
 	t_pro	*nxt;
 	t_pro	*tmp2;

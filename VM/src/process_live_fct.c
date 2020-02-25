@@ -1,6 +1,5 @@
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 #include "op.h"
 
 void			ft_free_process_node(t_pro **process)

@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <ctype.h>
+
 #include <limits.h>
+#include "libft.h"
 #include "op.h"
 
 int		champ_nb(uint32_t owner)
